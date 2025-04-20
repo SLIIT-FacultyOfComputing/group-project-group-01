@@ -1,0 +1,79 @@
+
+.footer{
+    position: center;
+    bottom:0;
+    width:100%;
+    height: 50%;
+    background-color: rgb(32, 107, 51);
+    text-align:center;
+    color:white;
+}
+
+body {
+    background-color: #aeddc7; /* Matches your .bg-light-green */
+    margin: 0;
+    padding: 0;
+}
+
+.bg-light-green {
+    background-color: #beebd6;
+}
+
+
+.text-green {
+    color: #2d6a4f;
+}
+
+/* Greenish card background */
+.card-body-custom {
+    background-color: #d1f1e0; /* Soft green card background */
+}
+
+/* Custom green border and background for form controls */
+.form-control {
+    border: 1px solid #78c2ad; /* Light green border */
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #2d6a4f; /* Dark green focus border */
+    box-shadow: 0 0 5px rgba(45, 106, 79, 0.5); /* Soft green shadow */
+}
+
+/* Green button with hover effect */
+.btn-green {
+    background-color: #2d6a4f; /* Dark green */
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-green:hover {
+    background-color: #245d3d; /* Slightly darker green on hover */
+}
+
+.btn-green:focus {
+    outline: none;
+}
+
+/* Red border for invalid fields */
+.is-invalid {
+    border-color: #f44336; /* Red border for invalid input */
+}
+
+.invalid-feedback {
+    color: #f44336; /* Red feedback message */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        width: 90%; /* Ensure the card takes up more space on mobile */
+    }
+}

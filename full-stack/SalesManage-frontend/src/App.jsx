@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent'
 import ListSaleComponent from './components/ListSaleComponent'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import SalesComponent from './components/SalesComponent'
+import Inventory from './components/inventory';
 
 
 
@@ -25,6 +26,8 @@ function App() {
 
         {/* //http://localhost:3000/edit-sales/1 */}
         <Route path='/edit-sales/:id' element = {<SalesComponent/>}></Route>
+        <Route path='/inventory' element={<Inventory />}></Route>
+
       </Routes>
       <FooterComponent/>
       </BrowserRouter>

@@ -4,7 +4,7 @@ const FooterComponent = () => {
   return (
     <div>
         <footer>
-            <nav className = 'navbar fixed-bottom navbar-expand-lg navbar-dark' style={{ backgroundColor: '#189e39'}}>
+            <nav className = 'navbar fixed-bottom navbar-expand-lg navbar-dark' style={{ backgroundColor: '#1a3e2a'}}>
                 <span></span>
             </nav>
         </footer>

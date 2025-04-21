@@ -43,11 +43,11 @@ const ListSaleComponent = () => {
     }
 
   return (
-    <div className="container bg-light-green py-4 rounded shadow">
-  <h1 className="text-green mb-4 text-center">List of Sales</h1>
+    <div className="container bg-light-green py-4  background-gradient">
+        <h1 className="text-white mb-4 text-center">List of Sales</h1>
 
   <div className="d-flex justify-content-end mb-3">
-    <button className="btn btn-green" onClick={addNewSale}>Add Sale</button>
+    <button className="btn" style={{ backgroundColor: '#1a3e2a', color: '#fff' }} onClick={addNewSale}>Add Sale</button>
   </div>
 
   <div className="table-responsive">

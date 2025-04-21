@@ -107,14 +107,15 @@ const SalesComponent = () => {
     }
 
     return (
-        <div className="container d-flex justify-content-center align-items-center min-vh-100 bg-light-green">
+        <div className="container d-flex justify-content-center align-items-center min-vh-100 ">
         <div className="row w-100">
         <div className="card col-md-6 mx-auto shadow-lg rounded-4 bg-light-green card-body-custom">
+        
             {pageTitle()}
             <div className="card-body p-4">
                 <form>
                     <div className="form-group mb-3">
-                        <label className="form-label text-green">Customer Name</label>
+                        <label className="form-label text-black">Customer Name</label>
                         <input
                             type="text"
                             placeholder="Enter customer name"
@@ -127,7 +128,7 @@ const SalesComponent = () => {
                     </div>
 
                     <div className="form-group mb-3">
-                        <label className="form-label text-green">Product Name</label>
+                        <label className="form-label text-black">Product Name</label>
                         <input
                             type="text"
                             placeholder="Enter product name"
@@ -140,7 +141,7 @@ const SalesComponent = () => {
                     </div>
 
                     <div className="form-group mb-3">
-                        <label className="form-label text-green">Unit Price</label>
+                        <label className="form-label text-black">Unit Price</label>
                         <input
                             type="text"
                             placeholder="Enter unit price"
@@ -152,7 +153,7 @@ const SalesComponent = () => {
                     </div>
 
                     <div className="form-group mb-3">
-                        <label className="form-label text-green">Quantity</label>
+                        <label className="form-label text-black">Quantity</label>
                         <input
                             type="text"
                             placeholder="Enter quantity"
@@ -165,7 +166,7 @@ const SalesComponent = () => {
                     </div>
 
                     <div className="form-group mb-3">
-                        <label className="form-label text-green">Price</label>
+                        <label className="form-label text-black">Price</label>
                         <input
                             type="text"
                             placeholder="Enter price"
@@ -178,7 +179,7 @@ const SalesComponent = () => {
                     </div>
 
                     <div className="form-group mb-4">
-                        <label className="form-label text-green">Date</label>
+                        <label className="form-label text-black">Date</label>
                         <input
                             type="text"
                             placeholder="Enter date"

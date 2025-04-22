@@ -27,6 +27,10 @@ public class StockService {
         int totalUsed = InvRepo.getTotalUsageByName(material);
         int currentStock = totalAdded - totalUsed;
 
+        if (currentStock < 0) {
+            throw new RuntimeException("Stock for " + material + " is not enough!");
+        }        
+
         Stock stock = StockRepo.findByMaterial(material)
                 .orElseGet(() -> {
                     Stock s = new Stock();

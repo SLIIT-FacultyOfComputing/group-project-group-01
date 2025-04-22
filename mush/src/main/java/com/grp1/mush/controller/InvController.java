@@ -36,4 +36,8 @@ public class InvController {
     public InvDTO getInvById(@PathVariable Long nid) {
         return InvService.getInvById(nid);
     }
+    @GetMapping("/getInvByUsage/{usageType}")
+    public List<InvDTO> getInvByUsageType(@PathVariable String usageType) {
+        return InvService.getInvByUsageType(usageType);
+    }
 }

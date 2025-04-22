@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class InvDTO {
     private Long nid;
     private String material;
+    private String usageType;
     private Integer Used_stock;
 }

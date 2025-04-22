@@ -48,4 +48,8 @@ public class InvService {
                 .orElseThrow(() -> new RuntimeException("Inv not found with id: " + nid));
         return modelMapper.map(Inv, InvDTO.class);
     }   
+    public List<InvDTO> getInvByUsageType(String usageType) {
+        List<Inv> InvList = InvRepo.findByUsageType(usageType);
+        return modelMapper.map(InvList, new TypeToken<List<InvDTO>>(){}.getType());
+    }
 }

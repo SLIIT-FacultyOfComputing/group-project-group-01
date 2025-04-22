@@ -8,10 +8,12 @@ export default function SaveInv() {
   
   const [Inv,setInv] = useState({
     material:"",
-    used_stock:""
+    used_stock:"",
+    usageType:""
   })
 
-  const{material,used_stock}=Inv
+  const{material,used_stock,usageType}=Inv
+
   const onInputChange=(event)=>{
 
     setInv({...Inv, [event.target.name]: event.target.value});
@@ -19,8 +21,20 @@ export default function SaveInv() {
 
   const onSubmit=async (event)=>{
     event.preventDefault();
-    await axios.post("http://localhost:8080/api/v2/saveInv",Inv);
-    navigate("/Inv");
+    
+    try {
+      await axios.post('http://localhost:8080/api/v2/saveInv', Inv);
+      navigate('/Inv');
+    } 
+    catch (error) {
+      const backendMessage = error?.response?.data?.message;
+      
+      if (backendMessage && backendMessage.includes("enough")) {
+        alert(`⚠️ Warning: ${backendMessage}, Please check the stock amount.`);
+      } else {
+        alert(" Something went wrong. Please try again.");
+      }
+    }
   };
 
   return (
@@ -32,10 +46,10 @@ export default function SaveInv() {
           
           <h2 className="text-center m-4"
           style={{color:"rgb(59, 97, 63)"}}>
-          Add Allocated Material</h2>
+          Add Allocated Material
+          </h2>
 
           <form onSubmit={(event) => onSubmit(event)}>
-          
           <div className="mb-3">
             <label htmlFor="material" className="form-label"
             style={{color:"rgb(59, 97, 63)",
@@ -52,6 +66,27 @@ export default function SaveInv() {
             value={material}
             onChange={(event)=>onInputChange(event)}
             ></input>
+          </div>
+
+          <div className="selection mb-3">
+          <label htmlFor="usageType" className="form-label"
+            style={{color:"rgb(59, 97, 63)",
+            marginLeft:"-370px",
+            fontWeight:"bold",}}
+            >
+            Usage Type
+          </label>
+          <select
+            className="form-control"
+            name="usageType"
+            value={usageType}
+            onChange={(event) => onInputChange(event)}
+          >
+            <option value="">Select usage type</option>
+            <option value="sales">Sales</option>
+            <option value="lab">Lab</option>
+            <option value="other">Other</option>
+          </select>
           </div>
 
           <div className="mb-3">

@@ -1,5 +1,6 @@
 package com.grp1.mush.repo;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,4 +12,6 @@ import com.grp1.mush.model.Inv;
 public interface InvRepo extends JpaRepository<Inv, Long>{   
     @Query("SELECT COALESCE(SUM(i.Used_stock), 0) FROM Inv i WHERE i.material = :material")
     int getTotalUsageByName(@Param("material") String material);
+
+    List<Inv> findByUsageType(String usageType);    
 }

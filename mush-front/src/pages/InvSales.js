@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom'
 export default function Inv() {
 
     const [Invs,setInvs]=useState([])
-
+    
     useEffect(()=>{
       loadInvs();
     },[]);
         
         const loadInvs=async()=>{
-        const result=await axios.get("http://localhost:8080/api/v2/getInvs");
+        const result=await axios.get("http://localhost:8080/api/v2/getInvByUsage/sales");
         setInvs(result.data);
       };
 
@@ -21,7 +21,6 @@ export default function Inv() {
       };
 
     return (
-
     <div className='container'>
 
       <Link to="/InvLab" className="btn mx-2" style={{marginLeft:"-100px"}}>Lab</Link>
@@ -40,7 +39,6 @@ export default function Inv() {
     <tr>
       <th scope="col" style={{color:" #354e2d"}}>#</th>
       <th scope="col" style={{color:" #354e2d"}}>Material Name</th>
-      <th scope="col" style={{color:" #354e2d"}}>Usage Type</th>
       <th scope="col" style={{color:" #354e2d"}}>Stock</th>
       <th scope="col" style={{color:" #354e2d"}}>Actions</th>
     </tr>
@@ -51,7 +49,6 @@ export default function Inv() {
         <tr>
         <th scope="row" key={index}>{index+1}</th>
         <td>{Invs.material}</td>
-        <td>{Invs.usageType}</td>
         <td>{Invs.used_stock}</td>
         <td>
           <Link className="btn btn-outline-success mx-2" 

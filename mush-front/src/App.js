@@ -14,6 +14,9 @@ import Inv from './pages/Inv';
 import Stock from './pages/Stock';
 import Name from './layout/Name';
 import Dashboard from './pages/Dashboard';
+import InvLab from './pages/InvLab';
+import InvSales from './pages/InvSales';
+import InvOther from './pages/InvOther';
 
 function App() {
   return (
@@ -39,6 +42,9 @@ function App() {
         <Route exact path="/EditInv/:InvId" element={<EditInv/>}/>
         <Route exact path="/SaveSupplier" element={<SaveSupplier/>}/>
         <Route exact path="/EditSupplier/:SupplierId" element={<EditSupplier/>}/>
+        <Route exact path="/InvLab" element={<InvLab/>}/>
+        <Route exact path="/InvSales" element={<InvSales/>}/>
+        <Route exact path="/InvOther" element={<InvOther/>}/>
       </Routes>
       </Router>
     </div>

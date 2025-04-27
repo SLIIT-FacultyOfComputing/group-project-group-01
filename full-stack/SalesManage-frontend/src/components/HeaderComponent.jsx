@@ -15,6 +15,11 @@ const HeaderComponent = () => {
     navigate('/sales');
     setMenuOpen(false); 
   };
+
+  const goToPreorderList = () => {
+    navigate('/preorders');
+    setMenuOpen(false); 
+  };
   
 
   return (
@@ -54,6 +59,10 @@ const HeaderComponent = () => {
                 </button>
                 <button className="dropdown-item text-white" onClick={goToSalesList} style={{ background: 'none', border: 'none' }}>
                   Sales List
+                </button>
+
+                <button className="dropdown-item text-white" onClick={goToPreorderList} style={{ background: 'none', border: 'none' }}>
+                  Pre Order List
                 </button>
               </div>
             )}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { createSale, getSale, updateSale } from '../services/SalesService'
+import { createPreorder, getPreorder, updatePreorder } from '../services/PreordersService'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const SalesComponent = () => {
+const PreorderComponent = () => {
     const [customer_name, setCustomerName] = useState('')
     const [product_name, setProductName] = useState('')
     const [unit_price, setUnitPrice] = useState('')
@@ -24,7 +24,7 @@ const SalesComponent = () => {
 
     useEffect(() => {
         if (id) {
-            getSale(id).then((response) => {
+            getPreorder(id).then((response) => {
                 setCustomerName(response.data.customer_name)
                 setProductName(response.data.product_name)
                 setUnitPrice(response.data.unit_price)
@@ -35,7 +35,7 @@ const SalesComponent = () => {
                 console.error(error)
             })
         } else {
-            // Auto-fill today's date when adding new sale
+            // Auto-fill today's date when adding new Preorder
             const today = new Date()
             const formattedDate = today.toISOString().split('T')[0]
             setDate(formattedDate)
@@ -52,24 +52,24 @@ const SalesComponent = () => {
         }
     }, [unit_price, quantity])
 
-    function saveOrupdateSale(e) {
+    function saveOrupdatePreorder(e) {
         e.preventDefault()
 
         if (validateForm()) {
-            const sale = { customer_name, product_name, unit_price, quantity, price, date }
-            console.log(sale)
+            const Preorder = { customer_name, product_name, unit_price, quantity, price, date }
+            console.log(Preorder)
 
             if (id) {
-                updateSale(id, sale).then((response) => {
+                updatePreorder(id, Preorder).then((response) => {
                     console.log(response.data)
-                    navigator('/sales')
+                    navigator('/preorders')
                 }).catch(error => {
                     console.error(error)
                 })
             } else {
-                createSale(sale).then((response) => {
+                createPreorder(Preorder).then((response) => {
                     console.log(response.data)
-                    navigator('/sales')
+                    navigator('/preorders')
                 }).catch(error => {
                     console.error(error)
                 })
@@ -115,9 +115,9 @@ const SalesComponent = () => {
 
     function pageTitle() {
         if (id) {
-            return <h2 className='text-center mb-4'>Update Sale</h2>
+            return <h2 className='text-center mb-4'>Update Preorder</h2>
         } else {
-            return <h2 className='text-center mb-4'>Add Sale</h2>
+            return <h2 className='text-center mb-4'>Add Preorder</h2>
         }
     }
 
@@ -205,7 +205,7 @@ const SalesComponent = () => {
                                 />
                             </div>
 
-                            <button className="btn btn-green w-100" onClick={saveOrupdateSale}>Submit</button>
+                            <button className="btn btn-green w-100" onClick={saveOrupdatePreorder}>Submit</button>
                         </form>
                     </div>
                 </div>
@@ -213,4 +213,4 @@ const SalesComponent = () => {
         </div>
     )
 }
-export default SalesComponent
+export default PreorderComponent

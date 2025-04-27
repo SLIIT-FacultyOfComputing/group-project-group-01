@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import styles from "../cssFiles/Save.module.css";
 
 export default function SaveRaw() {
 
@@ -24,24 +25,17 @@ export default function SaveRaw() {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        
-        <div className ="col-md-6 offset-md-3  rounded p-4 mt-2 shadow"
-          style={{background: "radial-gradient(ellipse,rgb(237, 241, 214), rgb(157, 192, 139))"}}>
-          
-          <h2 className="text-center m-4"
-          style={{color:"rgb(59, 97, 63)"}}>
+    <div className={styles.container}>
+
+    <div className="row">
+        <div className ={styles.containerOne}>   
+          <h2 className={styles.headerOne}>
           Add Purchased Material</h2>
 
           <form onSubmit={(event) => onSubmit(event)}>
           
           <div className="mb-3">
-            <label htmlFor="material" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",
-            }}>
+            <label htmlFor="material" className={styles.formLabel}>
               Material Name
             </label>
             <input 
@@ -55,10 +49,7 @@ export default function SaveRaw() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="stock" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-410px",
-            fontWeight:"bold",}}>
+            <label htmlFor="stock" className={styles.formLabel2}>
               Stock
             </label>
             <input 
@@ -70,13 +61,24 @@ export default function SaveRaw() {
             onChange={(event)=>onInputChange(event)}
             ></input>
           </div>
-
-          <button type="submit" className="btn btn-outline-success">Submit</button>
-          <Link className="btn btn-outline-danger mx-2" to="/">
-          Cancel</Link>
+          <div className="d-flex justify-content-center gap-1 mt-3">
+            <button type="submit" className="btn btn-outline-success">Submit</button>
+            <Link className="btn btn-outline-danger mx-1" to="/">
+            Cancel</Link>
+          </div>
           </form>
         </div>
-      </div>
+        </div>
+        <div className={styles.Div2}>
+        <h3>Instructions</h3> 
+        <ul>
+          <li>Enter the purchased material name in the input box.</li>
+          <li>Provide the purchased stock amount in numeric format.</li>
+          <li>Click "Submit" to save the material details.</li>
+          <li>Click "Cancel" to go back without saving.</li>
+          <li>Ensure all fields are filled correctly.</li>
+        </ul>
+        </div>
     </div>
   )
 }

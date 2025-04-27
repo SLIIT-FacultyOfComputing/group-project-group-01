@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import DownBut from '../layout/DownBut';
 
 export default function Raw() {
 
@@ -24,14 +23,12 @@ export default function Raw() {
 
     return (
     <div className='container'>
-        <div className='py-4'>
-        <table 
-        className="table border shadow table-bordered"
-        style={{
-          borderRadius: "8px", 
-          overflow: "hidden",
-        }}
-        >
+      <div className="d-flex justify-content-between align-items-center mb-3 top-bar"
+      style={{fontSize:"16px",fontWeight:"600",color:"rgb(59, 97, 63)",padding:"10px"}}>
+        Purchased Raw Material Table
+      </div>
+        <div className="table-container">
+        <table className="table custom-table table-hover table-striped border shadow ">
   <thead>
     <tr>
       <th scope="col" style={{color:" #354e2d"}}>#</th>
@@ -48,10 +45,10 @@ export default function Raw() {
         <td>{Raws.material}</td>
         <td>{Raws.stock}</td>
         <td>
-          <Link className="btn btn-outline-success mx-2" 
+          <Link className="btn btn-outline-success btn-sm custom-btn" 
           to={`/EditRaw/${Raws.id}`}>
           Update</Link>
-          <button className="btn btn-danger mx-2"
+          <button className="btn btn-outline-danger btn-sm custom-btn"
           
           onClick={()=>deleteRaw(Raws.id)}
           >Delete</button>
@@ -62,7 +59,6 @@ export default function Raw() {
   
   </tbody>
 </table>
-<DownBut/>
         </div>
         </div>
   )

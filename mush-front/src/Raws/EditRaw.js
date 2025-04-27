@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import styles from '../cssFiles/Edit.module.css'
 
 export default function EditRaw() {
 
@@ -39,11 +40,14 @@ export default function EditRaw() {
   return (
     <div className="container">
       <div className="row">
-        <div className ="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Edit Raw Material</h2>
+      <div className ={styles.containerOne}>   
+          <h2 className={styles.headerOne}>
+          Edit Purchased Material</h2>
+
           <form onSubmit={(event) => onSubmit(event)}>
+          
           <div className="mb-3">
-            <label htmlFor="material" className="form-label">
+            <label htmlFor="material" className={styles.formLabel}>
               Material Name
             </label>
             <input 
@@ -55,22 +59,25 @@ export default function EditRaw() {
             onChange={(event)=>onInputChange(event)}
             ></input>
           </div>
+
           <div className="mb-3">
-            <label htmlFor="stock" className="form-label">
+            <label htmlFor="stock" className={styles.formLabel2}>
               Stock
             </label>
             <input 
             type={"text"}
             className="form-control"
-            placeholder="Stock amount"
+            placeholder="Stock amount "
             name="stock"
             value={stock}
             onChange={(event)=>onInputChange(event)}
             ></input>
           </div>
-          <button type="submit" className="btn btn-outline-success">Submit</button>
-          <Link className="btn btn-outline-danger mx-2" to="/">
-          Cancel</Link>
+          <div className="d-flex justify-content-center gap-1 mt-3">
+            <button type="submit" className="btn btn-outline-success">Submit</button>
+            <Link className="btn btn-outline-danger mx-1" to="/">
+            Cancel</Link>
+          </div>
           </form>
         </div>
       </div>

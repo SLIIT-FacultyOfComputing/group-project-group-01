@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import styles from '../cssFiles/Edit.module.css'
 
 export default function EditSupplier() {
 
@@ -41,95 +42,77 @@ export default function EditSupplier() {
   return (
     <div className="container">
       <div className="row">
-        <div className ="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Edit Supplier</h2>
-          <form onSubmit={(event) => onSubmit(event)}>
-          <div className="mb-3">
-            <label htmlFor="supplier" className="form-label">
-              Supplier Name
-            </label>
-            <input 
-            type={"text"}
-            className="form-control"
-            placeholder="Enter supplier name"
-            name="supplier"
-            value={supplier}
-            onChange={(event)=>onInputChange(event)}
-            ></input>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="material" className="form-label">
-              material Name
-            </label>
-            <input 
-            type={"text"}
-            className="form-control"
-            placeholder="Enter material name"
-            name="material"
-            value={material}
-            onChange={(event)=>onInputChange(event)}
-            ></input>
-          </div>
-
-
-          <div className="mb-3">
-            <label htmlFor="material" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",}}>
-              Material Name
-            </label>
-            <input 
-            type={"text"}
-            className="form-control"
-            placeholder="Enter material name"
-            name="material"
-            value={material}
-            onChange={(event)=>onInputChange(event)}
-            ></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="address" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",
-            }}>
-              Address
-            </label>
-            <input 
-            type={"text"}
-            className="form-control"
-            placeholder="Enter address"
-            name="address"
-            value={address}
-            onChange={(event)=>onInputChange(event)}
-            ></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="phone" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",
-            }}>
-              phone
-            </label>
-            <input 
-            type={"text"}
-            className="form-control"
-            placeholder="Enter phone number"
-            name="phone"
-            value={phone}
-            onChange={(event)=>onInputChange(event)}
-            ></input>
-          </div>
-
-          <button type="submit" className="btn btn-outline-success">Submit</button>
-          <Link className="btn btn-outline-danger mx-2" to="/">
-          Cancel</Link>
-          </form>
-        </div>
+        <div className = {styles.containerOne}>
+                  
+                  <h2 className={styles.headerOne}>
+                  Edit Supplier Details</h2>
+        
+                  <form onSubmit={(event) => onSubmit(event)}>
+                  
+                  <div className="mb-3">
+                    <label htmlFor="supplier" className={styles.formLabel}>
+                      Supplier Name
+                    </label>
+                    <input 
+                    type={"text"}
+                    className="form-control"
+                    placeholder="Enter supplier name"
+                    name="supplier"
+                    value={supplier}
+                    onChange={(event)=>onInputChange(event)}
+                    ></input>
+                  </div>
+        
+                  <div className="mb-3">
+                    <label htmlFor="material" className={styles.formLabel2}>
+                      Material Name
+                    </label>
+                    <input 
+                    type={"text"}
+                    className="form-control"
+                    placeholder="Enter material name"
+                    name="material"
+                    value={material}
+                    onChange={(event)=>onInputChange(event)}
+                    ></input>
+                  </div>
+        
+                  <div className="mb-3">
+                    <label htmlFor="address" className={styles.formLabel3}>
+                      Address
+                    </label>
+                    <input 
+                    type={"text"}
+                    className="form-control"
+                    placeholder="Enter address"
+                    name="address"
+                    value={address}
+                    onChange={(event)=>onInputChange(event)}
+                    ></input>
+                  </div>
+        
+                  <div className="mb-3">
+                    <label htmlFor="phone" className={styles.formLabel4}>
+                      phone
+                    </label>
+                    <input 
+                    type={"text"}
+                    className="form-control"
+                    placeholder="Enter phone number"
+                    name="phone"
+                    value={phone}
+                    onChange={(event)=>onInputChange(event)}
+                    ></input>
+                  </div>
+        
+                  <div className="d-flex justify-content-center gap-1 mt-3">
+                  <button type="submit" className="btn btn-outline-success">Submit</button>
+                  <Link className="btn btn-outline-danger mx-1" to="/">
+                  Cancel</Link>
+                  </div>
+                  
+                  </form>
+                </div>
       </div>
     </div>
   )

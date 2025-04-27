@@ -1,0 +1,45 @@
+
+.container {
+    padding: 0px;
+  }
+  
+  .top-bar {
+    background-color: rgb(195, 226, 180);
+    padding: 5px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .top-bar .btn-group .btn {
+    background-color: transparent;
+    border: none;
+    margin-right: 5px;
+    color: rgb(59, 97, 63);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .top-bar .btn-group .btn:hover {
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+  }
+  
+  .top-bar .text-muted {
+    font-size: 16px;
+    color: rgb(59, 97, 63);
+    margin-right: 15px;
+  }
+  
+  .table-container {
+    padding-top: 10px;
+  }
+  
+  .custom-table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .custom-btn {
+    margin: 0 5px;
+  }
+  

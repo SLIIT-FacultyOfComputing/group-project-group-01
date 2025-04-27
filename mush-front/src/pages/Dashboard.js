@@ -17,7 +17,7 @@ export default function BlackGreenBackground(){
         <div>
             <h1
             style={{
-                fontSize: "52px",
+                fontSize: "54px",
                 fontWeight: 700,
                 fontFamily: "Lexend, sans-serif",
                 textAlign: "left",
@@ -31,7 +31,7 @@ export default function BlackGreenBackground(){
                 fontFamily: "Lexend, sans-serif",
                 textAlign: "left",
                 marginLeft: "-60px",
-                fontSize: "17px",
+                fontSize: "18px",
                 color: " #EDF1D6" }}>
 
             All-in-one platform for smart mushroom farming. Track materials & manage inventory.<br />

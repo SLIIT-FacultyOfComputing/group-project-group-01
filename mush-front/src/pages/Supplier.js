@@ -22,14 +22,12 @@ export default function Supplier() {
 
     return (
     <div className='container'>
-        <div className='py-4'>
-        <table 
-        className="table border shadow table-bordered"
-        style={{
-          borderRadius: "8px", 
-          overflow: "hidden",
-        }}
-        >
+      <div className="d-flex justify-content-between align-items-center mb-3 top-bar"
+      style={{fontSize:"16px",fontWeight:"600",color:"rgb(59, 97, 63)",padding:"10px"}}>
+        Supplier Details Table
+      </div>
+      <div className="table-container">
+      <table className="table custom-table table-hover table-striped border shadow ">
   <thead>
     <tr>
       <th scope="col" style={{color:" #354e2d"}}>#</th>
@@ -50,10 +48,10 @@ export default function Supplier() {
         <td>{Suppliers.address}</td>
         <td>{Suppliers.phone}</td>
         <td>
-          <Link className="btn btn-outline-success mx-2" 
+          <Link className="btn btn-outline-success btn-sm custom-btn" 
           to={`/EditSupplier/${Suppliers.sid}`}>
           Update</Link>
-          <button className="btn btn-danger mx-2"
+          <button className="btn btn-outline-danger btn-sm custom-btn"
           
           onClick={()=>deleteSupplier(Suppliers.sid)}
           >Delete</button>

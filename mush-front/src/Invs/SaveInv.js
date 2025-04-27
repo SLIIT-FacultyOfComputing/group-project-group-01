@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import styles from '../cssFiles/Save.module.css';
 
 export default function SaveInv() {
 
@@ -38,24 +39,18 @@ export default function SaveInv() {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
+
       <div className="row">
-        
-        <div className ="col-md-6 offset-md-3  rounded p-4 mt-2 shadow"
-          style={{background: "radial-gradient(ellipse,rgb(237, 241, 214), rgb(157, 192, 139))"}}>
+        <div className ={styles.containerOne}>
           
-          <h2 className="text-center m-4"
-          style={{color:"rgb(59, 97, 63)"}}>
+          <h2 className={styles.headerOne}>
           Add Allocated Material
           </h2>
 
           <form onSubmit={(event) => onSubmit(event)}>
           <div className="mb-3">
-            <label htmlFor="material" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",
-            }}>
+            <label htmlFor="material" className={styles.formLabel}>
               Material Name
             </label>
             <input 
@@ -69,11 +64,7 @@ export default function SaveInv() {
           </div>
 
           <div className="selection mb-3">
-          <label htmlFor="usageType" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-370px",
-            fontWeight:"bold",}}
-            >
+          <label htmlFor="usageType" className={styles.formLabel2}>
             Usage Type
           </label>
           <select
@@ -90,10 +81,7 @@ export default function SaveInv() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="used_stock" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-410px",
-            fontWeight:"bold",}}>
+            <label htmlFor="used_stock" className={styles.formLabel3}>
               Stock
             </label>
             <input 
@@ -105,13 +93,26 @@ export default function SaveInv() {
             onChange={(event)=>onInputChange(event)}
             ></input>
           </div>
-
-          <button type="submit" className="btn btn-outline-success">Submit</button>
-          <Link className="btn btn-outline-danger mx-2" to="/">
-          Cancel</Link>
+          
+          <div className="d-flex justify-content-center gap-1 mt-3">
+              <button type="submit" className="btn btn-outline-success">Submit</button>
+              <Link className="btn btn-outline-danger mx-1" to="/">
+              Cancel</Link>
+          </div>
           </form>
         </div>
       </div>
+      <div className={styles.Div2}>
+        <h3>Instructions</h3>
+        <ul>
+          <li>Enter the allocated material name in the input box.</li>
+          <li>Select the usage type from the dropdown menu.</li>
+          <li>Provide the allocated stock amount in numeric format.</li>
+          <li>Click "Submit" to save the material details.</li>
+          <li>Click "Cancel" to go back without saving.</li>
+          <li>Ensure all fields are filled correctly.</li>
+        </ul>
+        </div>
     </div>
   )
 }

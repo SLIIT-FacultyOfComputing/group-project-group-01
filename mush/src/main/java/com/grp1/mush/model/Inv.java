@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -21,5 +21,5 @@ public class Inv {
 
     @CreationTimestamp
     @Column(name = "date", nullable = false, updatable = false)
-    private LocalDateTime date;
+    private Date date;
 }

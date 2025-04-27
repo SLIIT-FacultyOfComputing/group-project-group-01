@@ -21,12 +21,7 @@ import InvOther from './pages/InvOther';
 function App() {
   return (
     <div 
-    className="App flex items-center justify-center text-white"
-    style={{
-    height: "900px",
-    background: 'radial-gradient(circle,rgb(157, 192, 139), rgb(86, 138, 91),rgb(53, 78, 45) )',
-    padding: "150px"
-    }}>
+    className="appBackground flex items-center justify-center text-white">
       <Router>  
       <Navbar/>
       <Routes>

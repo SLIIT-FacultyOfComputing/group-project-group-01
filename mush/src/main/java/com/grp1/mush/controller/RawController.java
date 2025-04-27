@@ -4,8 +4,6 @@ import com.grp1.mush.dto.RawDTO;
 import com.grp1.mush.service.RawService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,9 +34,5 @@ public class RawController {
     @GetMapping("/getRaw/{id}")
     public RawDTO getRawById(@PathVariable Long id) {
         return RawService.getRawById(id);
-    }
-    @GetMapping("/download-pdf")
-    public ResponseEntity<ByteArrayResource> downloadPdf(){
-        return RawService.downloadPdf();
     }
 }

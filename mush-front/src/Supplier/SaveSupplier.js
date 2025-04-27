@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import styles from "../cssFiles/Save.module.css";
 
 export default function SaveSupplier() {
 
@@ -26,24 +27,18 @@ export default function SaveSupplier() {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div className="row">
         
-        <div className ="col-md-6 offset-md-3  rounded p-4 mt-2 shadow"
-          style={{background: "radial-gradient(ellipse,rgb(237, 241, 214), rgb(157, 192, 139))"}}>
+        <div className = {styles.containerOne}>
           
-          <h2 className="text-center m-4"
-          style={{color:"rgb(59, 97, 63)"}}>
+          <h2 className={styles.headerOne}>
           Add Supplier Details</h2>
 
           <form onSubmit={(event) => onSubmit(event)}>
           
           <div className="mb-3">
-            <label htmlFor="supplier" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",
-            }}>
+            <label htmlFor="supplier" className={styles.formLabel}>
               Supplier Name
             </label>
             <input 
@@ -57,10 +52,7 @@ export default function SaveSupplier() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="material" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-340px",
-            fontWeight:"bold",}}>
+            <label htmlFor="material" className={styles.formLabel2}>
               Material Name
             </label>
             <input 
@@ -74,11 +66,7 @@ export default function SaveSupplier() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="address" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-390px",
-            fontWeight:"bold",
-            }}>
+            <label htmlFor="address" className={styles.formLabel3}>
               Address
             </label>
             <input 
@@ -92,11 +80,7 @@ export default function SaveSupplier() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="phone" className="form-label"
-            style={{color:"rgb(59, 97, 63)",
-            marginLeft:"-400px",
-            fontWeight:"bold",
-            }}>
+            <label htmlFor="phone" className={styles.formLabel4}>
               phone
             </label>
             <input 
@@ -109,11 +93,23 @@ export default function SaveSupplier() {
             ></input>
           </div>
 
+          <div className="d-flex justify-content-center gap-1 mt-3">
           <button type="submit" className="btn btn-outline-success">Submit</button>
-          <Link className="btn btn-outline-danger mx-2" to="/">
+          <Link className="btn btn-outline-danger mx-1" to="/">
           Cancel</Link>
+          </div>
+          
           </form>
         </div>
+      </div>
+       <div className={styles.Div2}>
+              <h3>Instructions</h3>
+              <ul>
+                <li>Fill in the supplier name, material name, address, and phone number.</li>
+                <li>Click "Submit" to save the supplier details.</li>
+                <li>Click "Cancel" to go back without saving.</li>
+                <li>Ensure all fields are filled correctly.</li>
+              </ul>
       </div>
     </div>
   )

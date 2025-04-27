@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import styles from '../cssFiles/Edit.module.css'
 
 export default function EditInv() {
 
@@ -52,11 +53,15 @@ export default function EditInv() {
   return (
     <div className="container">
       <div className="row">
-        <div className ="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Edit Inv Material</h2>
+      <div className ={styles.containerOne}>
+          
+          <h2 className={styles.headerOne}>
+          Edit Allocated Material
+          </h2>
+
           <form onSubmit={(event) => onSubmit(event)}>
           <div className="mb-3">
-            <label htmlFor="material" className="form-label">
+            <label htmlFor="material" className={styles.formLabel}>
               Material Name
             </label>
             <input 
@@ -68,9 +73,9 @@ export default function EditInv() {
             onChange={(event)=>onInputChange(event)}
             ></input>
           </div>
-          
+
           <div className="selection mb-3">
-          <label htmlFor="usageType" className="form-label">
+          <label htmlFor="usageType" className={styles.formLabel2}>
             Usage Type
           </label>
           <select
@@ -85,22 +90,26 @@ export default function EditInv() {
             <option value="other">Other</option>
           </select>
           </div>
+
           <div className="mb-3">
-            <label htmlFor="used_stock" className="form-label">
+            <label htmlFor="used_stock" className={styles.formLabel3}>
               Stock
             </label>
             <input 
             type={"text"}
             className="form-control"
-            placeholder="Stock amount"
+            placeholder="Stock amount "
             name="used_stock"
             value={used_stock}
             onChange={(event)=>onInputChange(event)}
             ></input>
           </div>
-          <button type="submit" className="btn btn-outline-success">Submit</button>
-          <Link className="btn btn-outline-danger mx-2" to="/">
-          Cancel</Link>
+          
+          <div className="d-flex justify-content-center gap-1 mt-3">
+              <button type="submit" className="btn btn-outline-success">Submit</button>
+              <Link className="btn btn-outline-danger mx-1" to="/">
+              Cancel</Link>
+          </div>
           </form>
         </div>
       </div>

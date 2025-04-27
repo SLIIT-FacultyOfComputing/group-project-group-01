@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -24,6 +24,6 @@ public class Raw{
 
     @CreationTimestamp
     @Column(name = "purch_date", nullable = false, updatable = false)
-    private LocalDateTime purch_date;
+    private Date purch_date;
 
 }

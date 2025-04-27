@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import '../cssFiles/Inv.css';
 
 export default function Inv() {
 
@@ -22,53 +23,58 @@ export default function Inv() {
 
     return (
 
-    <div className='container'>
+      <div className="container">
 
-      <Link to="/InvLab" className="btn mx-2" style={{marginLeft:"-100px"}}>Lab</Link>
-      <Link to="/InvSales" className="btn mx-2" style={{marginLeft:"-100px"}}>Sales</Link>
-      <Link to="/InvOther" className="btn mx-2" style={{marginLeft:"-100px"}}>Other</Link>
+      <div className="d-flex justify-content-between align-items-center mb-3 top-bar">
+        <div className="btn-group" role="group" aria-label="Navigation Buttons">
+          <Link to="/Inv" className="btn">Overall</Link>
+          <Link to="/InvLab" className="btn">Lab</Link>
+          <Link to="/InvSales" className="btn">Sales</Link>
+          <Link to="/InvOther" className="btn">Other</Link>
+        </div>
+        <div className="text-muted">
+          <medium>View inventory allocation by category</medium>
+        </div>
+     </div>
 
-        <div className='py-4'>
-        <table 
-        className="table border shadow table-bordered"
-        style={{
-          borderRadius: "8px", 
-          overflow: "hidden",
-        }}
-        >
-  <thead>
-    <tr>
-      <th scope="col" style={{color:" #354e2d"}}>#</th>
-      <th scope="col" style={{color:" #354e2d"}}>Material Name</th>
-      <th scope="col" style={{color:" #354e2d"}}>Usage Type</th>
-      <th scope="col" style={{color:" #354e2d"}}>Stock</th>
-      <th scope="col" style={{color:" #354e2d"}}>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      Invs.map((Invs,index)=>(
+  <div className="table-container">
+    <table className="table custom-table table-hover table-striped border shadow ">
+      <thead>
         <tr>
-        <th scope="row" key={index}>{index+1}</th>
-        <td>{Invs.material}</td>
-        <td>{Invs.usageType}</td>
-        <td>{Invs.used_stock}</td>
-        <td>
-          <Link className="btn btn-outline-success mx-2" 
-          to={`/EditInv/${Invs.nid}`}>
-          Update</Link>
-          <button className="btn btn-danger mx-2"
-          
-          onClick={()=>deleteInv(Invs.nid)}
-          >Delete</button>
-        </td>
-      </tr>
-      ))
-    }
-  
-  </tbody>
-</table>
-        </div>
-        </div>
+          <th scope="col"  style={{color:" #354e2d"}}>#</th>
+          <th scope="col"  style={{color:" #354e2d"}}>Material Name</th>
+          <th scope="col"  style={{color:" #354e2d"}}>Usage Type</th>
+          <th scope="col"  style={{color:" #354e2d"}}>Stock</th>
+          <th scope="col"  style={{color:" #354e2d"}}>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Invs.map((Invs, index) => (
+          <tr key={index}>
+            <th scope="row">{index + 1}</th>
+            <td>{Invs.material}</td>
+            <td>{Invs.usageType}</td>
+            <td>{Invs.used_stock}</td>
+            <td>
+              <Link
+                className="btn btn-outline-success btn-sm custom-btn"
+                to={`/EditInv/${Invs.nid}`}
+              >
+                Update
+              </Link>
+              <button
+                className="btn btn-outline-danger btn-sm custom-btn"
+                onClick={() => deleteInv(Invs.nid)}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
   )
 }

@@ -17,6 +17,9 @@ import Dashboard from './pages/Dashboard';
 import InvLab from './pages/InvLab';
 import InvSales from './pages/InvSales';
 import InvOther from './pages/InvOther';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
+import ProtectedLayout from './auth/ProtectedRoute';
 
 function App() {
   return (
@@ -25,21 +28,26 @@ function App() {
       <Router>  
       <Navbar/>
       <Routes>
-        <Route exact path="/" element={<Name/>}/>
-        <Route exact path="/Dashboard" element={<Dashboard/>}/>
-        <Route exact path="/Raw" element={<Raw/>}/>
-        <Route exact path="/Inv" element={<Inv/>}/>
-        <Route exact path="/Supplier" element={<Supplier/>}/>
-        <Route exact path="/Stock" element={<Stock/>}/>
-        <Route exact path="/SaveRaw" element={<SaveRaw/>}/>
-        <Route exact path="/EditRaw/:RawId" element={<EditRaw/>}/>
-        <Route exact path="/SaveInv" element={<SaveInv/>}/>
-        <Route exact path="/EditInv/:InvId" element={<EditInv/>}/>
-        <Route exact path="/SaveSupplier" element={<SaveSupplier/>}/>
-        <Route exact path="/EditSupplier/:SupplierId" element={<EditSupplier/>}/>
-        <Route exact path="/InvLab" element={<InvLab/>}/>
-        <Route exact path="/InvSales" element={<InvSales/>}/>
-        <Route exact path="/InvOther" element={<InvOther/>}/>
+        <Route exact path="/Login" element={<Login />} />
+        <Route exact path="/Signup" element={<Signup />} />
+
+        <Route element={<ProtectedLayout />}>
+            <Route exact path="/" element={<Name/>}/>
+            <Route exact path="/Dashboard" element={<Dashboard/>}/>
+            <Route exact path="/Raw" element={<Raw/>}/>
+            <Route exact path="/Inv" element={<Inv/>}/>
+            <Route exact path="/Supplier" element={<Supplier/>}/>
+            <Route exact path="/Stock" element={<Stock/>}/>
+            <Route exact path="/SaveRaw" element={<SaveRaw/>}/>
+            <Route exact path="/EditRaw/:RawId" element={<EditRaw/>}/>
+            <Route exact path="/SaveInv" element={<SaveInv/>}/>
+            <Route exact path="/EditInv/:InvId" element={<EditInv/>}/>
+            <Route exact path="/SaveSupplier" element={<SaveSupplier/>}/>
+            <Route exact path="/EditSupplier/:SupplierId" element={<EditSupplier/>}/>
+            <Route exact path="/InvLab" element={<InvLab/>}/>
+            <Route exact path="/InvSales" element={<InvSales/>}/>
+            <Route exact path="/InvOther" element={<InvOther/>}/>
+        </Route>
       </Routes>
       </Router>
     </div>

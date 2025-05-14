@@ -50,7 +50,7 @@ public class SalesController {
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteSales(@PathVariable("id") Long salesID) {
         salesService.deleteSales(salesID);
-        return ResponseEntity.ok("Deleted succesfully");
+        return ResponseEntity.ok("Deleted successfully");
     }
 }
 

@@ -61,4 +61,8 @@ public class PreordersServiceImpl implements PreordersService {
                 () -> new ResourceNotFoundException("Sale is not found with given id"+ PreordersID));
         PreordersRepository.deleteById(PreordersID);
     }
+
+    public List<Object[]> TotalPreorders() {
+        return PreordersRepository.TotalPreorders();
+    }
 }

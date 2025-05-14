@@ -27,6 +27,10 @@ public class Sales {
     private int quantity;
     private double price;
     private String date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false) // This is your foreign key column
+    private Product product;
 }
 
 

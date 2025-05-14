@@ -12,20 +12,22 @@ public class SalesMapper {
                 sales.getUnit_price(),
                 sales.getQuantity(),
                 sales.getPrice(),
-                sales.getDate()
-                );
-    }
-
-    public static Sales mapToSales(SalesDto salesDto){
-        return  new Sales(
-                salesDto.getId(),
-                salesDto.getCustomer_name(),
-                salesDto.getProduct_name(),
-                salesDto.getUnit_price(),
-                salesDto.getQuantity(),
-                salesDto.getPrice(),
-                salesDto.getDate()
+                sales.getDate(),
+                sales.getProduct() != null ? sales.getProduct().getProduct_id() : null
         );
     }
 
+    public static Sales mapToSales(SalesDto salesDto) {
+        Sales sales = new Sales();
+        sales.setId(salesDto.getId());
+        sales.setCustomer_name(salesDto.getCustomer_name());
+        sales.setProduct_name(salesDto.getProduct_name());
+        sales.setUnit_price(salesDto.getUnit_price());
+        sales.setQuantity(salesDto.getQuantity());
+        sales.setPrice(salesDto.getPrice());
+        sales.setDate(salesDto.getDate());
+
+        return sales;
+
+    }
 }

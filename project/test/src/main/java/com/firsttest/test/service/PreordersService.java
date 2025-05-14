@@ -14,4 +14,6 @@ public interface PreordersService {
     PreordersDto updatePreorders(Long PreordersID, PreordersDto updatedPreorders);
 
     void deletePreorders(Long PreordersID);
+
+    List<Object[]> TotalPreorders();
 }

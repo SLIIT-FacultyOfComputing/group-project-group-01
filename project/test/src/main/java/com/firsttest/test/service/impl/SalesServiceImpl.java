@@ -5,6 +5,7 @@ import com.firsttest.test.dto.SalesDto;
 import com.firsttest.test.entity.Sales;
 import com.firsttest.test.exception.ResourceNotFoundException;
 import com.firsttest.test.repository.SalesRepository;
+import com.firsttest.test.service.ProductService;
 import com.firsttest.test.service.SalesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,13 @@ import java.util.stream.Collectors;
 
 public class SalesServiceImpl implements SalesService {
     private SalesRepository salesRepository;
+    private ProductService productService;
+
     @Override
     public SalesDto createSales(SalesDto salesDto) {
         Sales sales = SalesMapper.mapToSales(salesDto);
         Sales savedSales = salesRepository.save(sales);
-
+        productService.updateProductQuantity(salesDto.getProductId(), salesDto.getQuantity());
         return SalesMapper.mapToSalesDto(savedSales);
     }
 

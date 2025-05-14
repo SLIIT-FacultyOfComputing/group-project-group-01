@@ -49,7 +49,12 @@ public class PreordersController {
     @DeleteMapping("{id}")
     public ResponseEntity<String> deletePreorders(@PathVariable("id") Long PreordersID) {
         PreordersService.deletePreorders(PreordersID);
-        return ResponseEntity.ok("Deleted succesfully");
+        return ResponseEntity.ok("Deleted successfully");
+    }
+
+    @GetMapping("/preorders/total")
+    public ResponseEntity<List<Object[]>>TotalPreorderItems() {
+        return ResponseEntity.ok(PreordersService.TotalPreorders());
     }
 }
 

@@ -1,5 +1,5 @@
 
-/* Simulate network delay
+// Simulate network delay
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Mock inventory data
@@ -76,33 +76,26 @@ export const getLowStockAlerts = async () => {
   await delay(300);
   const lowStock = MOCK_INVENTORY.filter(item => item.quantity <= item.thresholdLevel);
   return { data: lowStock };
-}; */
-import api from './axiosInstance'; // Ensure this points to your backend (http://localhost:8080/api)
+}; 
+/*import api from './axiosInstance';
 
-// Get all inventory items
 export const getInventoryItems = async () => {
   const response = await api.get('/inventory');
-  return response.data; // Returns { data: [...] }
+  return response.data;
 };
 
-// Update inventory item
 export const updateInventoryItem = async (id, data) => {
   const response = await api.put(`/inventory/${id}`, data);
-  return response.data; // Returns updated item
+  return response.data;
 };
 
-// Request materials (if implemented in backend)
-export const requestMaterials = async (requestData) => {
-  // TODO: Implement backend endpoint for this if needed
-  // Example:
-  // const response = await api.post('/material-requests', requestData);
-  // return response.data;
-  throw new Error('Not implemented in backend yet');
-};
-
-// Get low stock alerts
 export const getLowStockAlerts = async () => {
   const response = await api.get('/inventory/low-stock');
-  return response.data; // Returns { data: [...] }
+  return response.data;
 };
 
+export const requestMaterials = async (requestData) => {
+  const response = await api.post('/inventory/material-requests', requestData);
+  return response.data;
+};
+*/

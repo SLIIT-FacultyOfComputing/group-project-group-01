@@ -6,6 +6,7 @@ import com.firsttest.test.entity.Allocation;
 public class AllocationMapper {
     public static AllocationDto mapToAllocationDto(Allocation allocation) {
         return new AllocationDto(
+            
                 allocation.getId(),
                 allocation.getBranch().getBranchId(),
                 allocation.getProduct().getProduct_id(),

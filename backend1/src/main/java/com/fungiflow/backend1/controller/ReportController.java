@@ -1,0 +1,52 @@
+package com.fungiflow.backend1.controller;
+
+import com.fungiflow.backend1.service.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@CrossOrigin(origins = "http://localhost:3000")
+
+@RestController
+@RequestMapping("/api/reports")
+public class ReportController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ReportController.class);
+
+    @Autowired
+    private ReportService reportService;
+
+    @GetMapping("/sales")
+    public ResponseEntity<ByteArrayResource> getSalesReport(
+            @RequestParam String type,
+            @RequestParam int year,
+            @RequestParam(required = false) Integer month,
+            @RequestParam String generatedBy
+    ) {
+        // Default the month to January if it's not provided
+        int finalMonth = (month != null) ? month : 1;
+
+        try {
+            // Generate the report PDF
+            byte[] pdf = reportService.generateSalesReport(type, year, finalMonth, generatedBy);
+            ByteArrayResource resource = new ByteArrayResource(pdf);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=sales_report_" + year + "_" + finalMonth + ".pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .contentLength(pdf.length)
+                    .body(resource);
+
+        } catch (Exception e) {
+            // Log the error for debugging purposes
+            logger.error("Error generating sales report: {}", e.getMessage(), e);
+
+            // Return a 500 status with a message
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ByteArrayResource("Failed to generate report".getBytes()));
+        }
+    }
+}

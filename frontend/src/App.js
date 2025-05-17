@@ -12,6 +12,8 @@ import AddEmployee from './Employees/AddEmployee';
 import EditEmployee from './Employees/EditEmployee';
 import ViewEmployee from './Employees/ViewEmployee';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import SalesReport from './Reports/SalesReport'; 
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route exact path="/addemployee" element={<AddEmployee />} />
           <Route exact path="/editemployee/:id" element={<EditEmployee />} />
           <Route exact path="/viewemployee/:id" element={<ViewEmployee />} />
+          <Route path="/analytics/sales" element={<SalesReport />} />
+
 
         </Routes>
       </div>

@@ -1,39 +1,104 @@
 package com.fungiflow.backend1.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 @Entity
+@Table(name = "Sold")
 public class Sale {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private Double amount;
+    @Setter
+    @Column(name = "customer_name", nullable = false)
+    private String customerName;
+
+    @Setter
+    @Column(name = "product_name", nullable = false)
+    private String productName;
+
+    @NotNull
+    private Double unitPrice;
+
+    @NotNull
+    private Integer quantity;
+
+    private Double price;
+
+    @Setter
+    @NotNull
     private LocalDate date;
 
+    // Default constructor
     public Sale() {}
 
-    public Sale(String name, Double amount, LocalDate date) {
-        this.name = name;
-        this.amount = amount;
+    // Constructor with parameters
+    public Sale(String customerName, String productName, Double unitPrice, Integer quantity, LocalDate date) {
+        this.customerName = customerName;
+        this.productName = productName;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
         this.date = date;
+        this.price = calculatePrice();  // Automatically calculate price
     }
 
-    // Getters and setters
-    public Long getId() { return id; }
+    // Getter and Setter methods
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getCustomerName() {
+        return customerName;
+    }
 
-    public Double getAmount() { return amount; }
-    public void setAmount(Double amount) { this.amount = amount; }
+    public String getProductName() {
+        return productName;
+    }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+        this.price = calculatePrice();  // Recalculate price when unit price changes
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+        this.price = calculatePrice();  // Recalculate price when quantity changes
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    // Method to calculate total price
+    public Double calculatePrice() {
+        return this.unitPrice * this.quantity;
+    }
+
+    // Optional: For grouping purposes, you could add a getter to get the month from the date
+    public Month getMonth() {
+        return this.date.getMonth();
+    }
+
 }

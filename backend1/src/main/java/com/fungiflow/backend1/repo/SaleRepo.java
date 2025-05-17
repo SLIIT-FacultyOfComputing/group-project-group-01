@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface SaleRepo extends JpaRepository<Sale, Long> {
 
-    @Query("SELECT s.name, FUNCTION('MONTH', s.date), SUM(s.amount) FROM Sale s GROUP BY s.name, FUNCTION('MONTH', s.date)")
+    // Change the query to return Long for quantity
+    @Query("SELECT s.productName, FUNCTION('MONTH', s.date), SUM(s.quantity) FROM Sale s GROUP BY s.productName, FUNCTION('MONTH', s.date)")
     List<Object[]> getMonthlySalesSummary();
 }

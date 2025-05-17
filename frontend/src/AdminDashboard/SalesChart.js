@@ -11,6 +11,7 @@ import {
   Legend
 } from 'recharts';
 
+
 export default function SalesChart() {
   const [chartData, setChartData] = useState([]);
   const [lineKeys, setLineKeys] = useState([]);
@@ -18,16 +19,29 @@ export default function SalesChart() {
   useEffect(() => {
     axios.get("http://localhost:8080/api/admin/sales-chart-grouped")
       .then((response) => {
-        const data = response.data;
+        console.log("API Response:", response.data);
+        const rawData = response.data;
 
-        const keys = new Set();
-        data.forEach(entry => {
-          Object.keys(entry).forEach(key => {
-            if (key !== 'month') keys.add(key);
-          });
+        const groupedByMonth = {};
+        rawData.forEach(entry => {
+          if (!groupedByMonth[entry.month]) {
+            groupedByMonth[entry.month] = [];
+          }
+          groupedByMonth[entry.month].push(entry);
         });
 
-        setChartData(data);
+        const transformedData = [];
+        const keys = new Set();
+        Object.keys(groupedByMonth).forEach(month => {
+          const row = { month };
+          groupedByMonth[month].forEach(product => {
+            row[product.productName] = product.quantity;
+            keys.add(product.productName);
+          });
+          transformedData.push(row);
+        });
+
+        setChartData(transformedData);
         setLineKeys(Array.from(keys));
       })
       .catch((error) => {
@@ -36,51 +50,79 @@ export default function SalesChart() {
   }, []);
 
   return (
-    <div className="chart-wrapper bg-white shadow-lg rounded-3 p-4 mx-auto" style={{ maxWidth: '1200px' }}>
-      <h4 className="text-center text-primary mb-4 fw-semibold"> Monthly Sales Performance</h4>
+    <div className="sales-chart-container" style={{
+      background: 'white',
+      borderRadius: '12px',
+      padding: '1rem',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+      width: '100%',
+      height: '100%', // Changed to 100% to fill the container properly
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
+      <h5 style={{ fontWeight: '600', color: '#0d6efd', marginBottom: '1rem' }}>
+        Monthly Sales Performance
+      </h5>
 
-      <div style={{ width: '100%', height: 400 }}>
+      <div style={{ width: '100%', height: 'calc(100% - 2.5rem)' }}> {/* Adjust height to account for title */}
         {chartData.length > 0 ? (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%"> {/* Changed from 200% to 100% */}
             <LineChart
               data={chartData}
-              margin={{ top: 20, right: 40, left: 20, bottom: 50 }}
+              margin={{ top: 15, right: 20, left: 0, bottom: 60 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+              <CartesianGrid strokeDasharray="2 2" stroke="#e0e0e0" />
               <XAxis
                 dataKey="month"
-                angle={-45}
+                angle={-30}
                 textAnchor="end"
                 interval={0}
                 stroke="#333"
                 height={60}
+                tick={{ fontSize: 12 }}
               />
-              <YAxis stroke="#333" />
+              <YAxis
+                stroke="#333"
+                tick={{ fontSize: 12 }}
+              />
               <Tooltip
                 contentStyle={{
                   backgroundColor: '#f8f9fa',
-                  border: '1px solid #ccc',
-                  borderRadius: '10px',
-                  padding: '10px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                  border: '1px solid #ddd',
+                  borderRadius: '8px',
+                  padding: '8px',
+                  fontSize: '12px',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
                 }}
               />
-              <Legend verticalAlign="top" height={36} iconType="circle" />
+              <Legend
+                verticalAlign="top"
+                height={40}
+                iconType="circle"
+                iconSize={8}
+                wrapperStyle={{
+                  paddingBottom: '10px',
+                  fontSize: '12px',
+                  flexWrap: 'wrap'
+                }}
+              />
+
               {lineKeys.map((key, index) => (
                 <Line
                   key={key}
                   type="monotone"
                   dataKey={key}
                   stroke={getColor(index)}
-                  strokeWidth={2}
-                  dot={{ r: 3 }}
-                  activeDot={{ r: 6 }}
+                  strokeWidth={1.5}
+                  dot={{ r: 2 }}
+                  activeDot={{ r: 4 }}
                 />
               ))}
             </LineChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-center text-muted">Loading chart data...</p>
+          <p className="text-center text-muted small">Loading chart data...</p>
         )}
       </div>
     </div>

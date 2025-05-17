@@ -13,13 +13,21 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Employee {
 
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String nic;
+
+    @Column(nullable = false)
     private String phone;
+
+    @Column(nullable = false)
     private String address;
 
     @Enumerated(EnumType.STRING)
@@ -35,6 +43,7 @@ public class Employee {
 
     public enum Role {
         LAB,
-        SALES
+        SALES,
+        INVENTORY
     }
 }

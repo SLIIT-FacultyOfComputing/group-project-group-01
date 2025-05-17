@@ -1,6 +1,5 @@
 package com.fungiflow.backend1.service;
 
-
 import com.fungiflow.backend1.dto.EmployeeDTO;
 import com.fungiflow.backend1.model.Employee;
 import com.fungiflow.backend1.repo.EmployeeRepo;
@@ -19,11 +18,16 @@ public class EmployeeService {
 
     public EmployeeDTO addEmployee(EmployeeDTO dto) {
         validateNICAndPhone(dto);
+
+        // Check if NIC already exists
+        if (employeeRepo.existsByNic(dto.getNic())) {
+            throw new IllegalArgumentException("NIC already exists!");
+        }
+
         Employee employee = dtoToEntity(dto);
         return entityToDTO(employeeRepo.save(employee));
     }
 
-    // Method to fetch all employees
     public List<EmployeeDTO> getAllEmployees() {
         return employeeRepo.findAll()
                 .stream()
@@ -31,7 +35,6 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    // Method to delete an employee by ID
     public void deleteEmployee(Long id) {
         employeeRepo.deleteById(id);
     }
@@ -41,6 +44,12 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
         validateNICAndPhone(dto);
+
+        // Check if NIC is being changed to an existing NIC
+        if (!existing.getNic().equals(dto.getNic()) && employeeRepo.existsByNic(dto.getNic())) {
+            throw new IllegalArgumentException("NIC already exists!");
+        }
+
         existing.setName(dto.getName());
         existing.setNic(dto.getNic());
         existing.setPhone(dto.getPhone());
@@ -51,19 +60,13 @@ public class EmployeeService {
         return entityToDTO(employeeRepo.save(existing));
     }
 
-    // Validate NIC and phone number formats
     private void validateNICAndPhone(EmployeeDTO dto) {
-        // Check if phone is null or empty
         if (dto.getPhone() == null || dto.getPhone().isEmpty()) {
             throw new IllegalArgumentException("Phone number is required");
         }
-
-        // Validate the phone number format (must be 10 digits)
         if (!dto.getPhone().matches("^\\d{10}$")) {
             throw new IllegalArgumentException("Phone number must be 10 digits");
         }
-
-        // Validate NIC number format
         if (!dto.getNic().matches("^(\\d{9}[vV]|\\d{12})$")) {
             throw new IllegalArgumentException("Invalid NIC number");
         }
@@ -99,5 +102,9 @@ public class EmployeeService {
             return entityToDTO(employee.get());
         }
         throw new RuntimeException("Employee not found");
+    }
+
+    public boolean existsByNic(String nic) {
+        return employeeRepo.existsByNic(nic);
     }
 }

@@ -38,31 +38,6 @@
 }
 
 
-/* Clean navbar buttons with misty hover effect, original font style */
-.navbar-nav .nav-link {
-  background-color: transparent;
-  color: #fff !important;
-  padding: 0.4rem 1rem;
-  margin: 0 0.3rem;
-  border-radius: 2rem;
-  transition: all 0.3s ease-in-out;
-  font-weight: normal;
-  text-transform: none;
-  letter-spacing: normal;
-  font-size: 1rem;
-  font-family: inherit;
-  backdrop-filter: none;
-}
-
-/* Misty blur effect only on hover/active */
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
-}
 
 /* Low Stock Alerts Table Styles */
 .low-stock-table {
@@ -142,4 +117,86 @@
 
 .sales-table th {
   font-size: 1rem;
+}
+
+/* Title Styling */
+.shadow-title {
+  color: #28a745; /* Text color */
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* subtle shadow for depth */
+  border-radius: 50px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.shadow-title:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover Effects for Cards */
+.hover-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Cards Styling */
+.card {
+  border-radius: 16px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* Sales Table Refinement */
+.table th, .table td {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.table td {
+  border-radius: 10px;
+}
+
+/* Chart Styling */
+.sales-chart {
+  border-radius: 15px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.sales-chart .chart-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Smooth Transition for Components */
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

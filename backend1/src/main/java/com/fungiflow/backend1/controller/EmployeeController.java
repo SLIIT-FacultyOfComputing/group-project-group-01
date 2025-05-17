@@ -3,9 +3,11 @@ package com.fungiflow.backend1.controller;
 import com.fungiflow.backend1.dto.EmployeeDTO;
 import com.fungiflow.backend1.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -21,8 +23,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public void addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        if (employeeService.existsByNic(employeeDTO.getNic())) {
+            return ResponseEntity.badRequest().body(Map.of("message", "NIC already exists!"));
+        }
         employeeService.addEmployee(employeeDTO);
+        return ResponseEntity.ok(Map.of("message", "Employee added successfully!"));
     }
 
     @DeleteMapping("/delete/{id}")

@@ -22,27 +22,26 @@ export default function Stock() {
         Stock Level Table
       </div>
        <div className="table-container">
-        <table className="table custom-table table-hover table-striped border shadow ">
-  <thead>
-    <tr>
-      <th scope="col" style={{color:" #354e2d"}}>#</th>
-      <th scope="col" style={{color:" #354e2d"}}>Material Name</th>
-      <th scope="col" style={{color:" #354e2d"}}>Available Stock</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      Stocks.map((Stocks,index)=>(
-        <tr>
-        <th scope="row" key={index}>{index+1}</th>
-        <td>{Stocks.material}</td>
-        <td>{Stocks.stock}</td>
-      </tr>
-      ))
-    }
-  
-  </tbody>
-</table>
+        <table className="table custom-table table-hover table-striped border shadow">
+          <thead>
+            <tr>
+              <th scope="col" style={{color:" #354e2d"}}>#</th>
+              <th scope="col" style={{color:" #354e2d"}}>Material Name</th>
+              <th scope="col" style={{color:" #354e2d"}}>Available Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              Stocks.map((Stock,index)=>(
+                <tr key={Stock.tid}>
+                  <th scope="row">{index+1}</th>
+                  <td>{Stock.material}</td>
+                  <td>{Stock.stock}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
         </div>
         </div>
   )

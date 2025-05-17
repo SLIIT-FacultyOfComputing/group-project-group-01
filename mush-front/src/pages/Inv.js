@@ -49,22 +49,22 @@ export default function Inv() {
         </tr>
       </thead>
       <tbody>
-        {Invs.map((Invs, index) => (
-          <tr key={index}>
+        {Invs.map((Inv, index) => (
+          <tr key={Inv.nid}>
             <th scope="row">{index + 1}</th>
-            <td>{Invs.material}</td>
-            <td>{Invs.usageType}</td>
-            <td>{Invs.used_stock}</td>
+            <td>{Inv.material}</td>
+            <td>{Inv.usageType}</td>
+            <td>{Inv.used_stock}</td>
             <td>
               <Link
                 className="btn btn-outline-success btn-sm custom-btn"
-                to={`/EditInv/${Invs.nid}`}
+                to={`/EditInv/${Inv.nid}`}
               >
                 Update
               </Link>
               <button
                 className="btn btn-outline-danger btn-sm custom-btn"
-                onClick={() => deleteInv(Invs.nid)}
+                onClick={() => deleteInv(Inv.nid)}
               >
                 Delete
               </button>

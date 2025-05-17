@@ -4,20 +4,32 @@ import { useNavigate, Link } from 'react-router-dom';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const login = async () => {
-    const res = await fetch('http://localhost:8080/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-      credentials: 'include',
-    });
+    setError('');
 
-    if (res.ok) {
-      navigate('/Dashboard');
-    } else {
-      alert('Login failed');
+    if (!username || !password) {
+      setError('Username and password are required');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        navigate('/Dashboard');
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (err) {
+      setError('Network error occurred');
     }
   };
 
@@ -25,10 +37,12 @@ function Login() {
     <div style={styles.container}>
       <div style={styles.card}>
         <h2 style={styles.title}>Login</h2>
+        {error && <div style={styles.error}>{error}</div>}
         <div style={styles.formGroup}>
           <input 
             style={styles.input} 
-            placeholder="Username" 
+            placeholder="Username"
+            value={username}
             onChange={e => setUsername(e.target.value)} 
           />
         </div>
@@ -36,11 +50,19 @@ function Login() {
           <input 
             style={styles.input} 
             type="password" 
-            placeholder="Password" 
+            placeholder="Password"
+            value={password}
             onChange={e => setPassword(e.target.value)} 
           />
         </div>
-        <button style={styles.button} onClick={login}>Login</button>
+        <button 
+          style={styles.button} 
+          onClick={login}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
+        >
+          Login
+        </button>
         <div style={styles.signupText}>
           Don't have an account? <Link to="/signup" style={styles.signupLink}>Sign up</Link>
         </div>
@@ -54,58 +76,63 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
-    fontFamily: 'Arial, sans-serif',
+    minHeight: '100%',
   },
   card: {
-    backgroundColor: 'white',
     padding: '2rem',
-    borderRadius: '8px',
+    backgroundColor: 'white',
+    borderRadius: '10px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     width: '100%',
-    maxWidth: '400px',
+    maxWidth: '400px'
   },
   title: {
     textAlign: 'center',
-    color: '#333',
-    marginBottom: '1.5rem',
+    color: '#354e2d',
+    marginBottom: '1.5rem'
   },
   formGroup: {
-    marginBottom: '1rem',
+    marginBottom: '1rem'
   },
   input: {
     width: '100%',
     padding: '0.75rem',
     border: '1px solid #ddd',
     borderRadius: '4px',
-    fontSize: '1rem',
-    boxSizing: 'border-box',
+    fontSize: '1rem'
   },
   button: {
     width: '100%',
     padding: '0.75rem',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#354e2d',
     color: 'white',
     border: 'none',
     borderRadius: '4px',
     fontSize: '1rem',
     cursor: 'pointer',
-    marginTop: '0.5rem',
-    transition: 'background-color 0.3s',
+    marginTop: '1rem'
   },
   buttonHover: {
-    backgroundColor: '#45a049',
+    backgroundColor: '#2c4125'
   },
   signupText: {
     textAlign: 'center',
     marginTop: '1rem',
-    color: '#666',
+    color: '#666'
   },
   signupLink: {
-    color: '#4CAF50',
+    color: '#354e2d',
     textDecoration: 'none',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
+  error: {
+    color: '#dc3545',
+    textAlign: 'center',
+    marginBottom: '1rem',
+    padding: '0.5rem',
+    backgroundColor: '#f8d7da',
+    borderRadius: '4px'
+  }
 };
 
 export default Login;

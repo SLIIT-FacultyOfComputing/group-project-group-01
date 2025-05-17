@@ -20,8 +20,10 @@ export default function SaveRaw() {
 
   const onSubmit=async (event)=>{
     event.preventDefault();
-    await axios.post("http://localhost:8080/api/v1/saveRaw",Raw);
+    await axios.post("http://localhost:8080/api/v1/saveRaw",Raw
+    );
     navigate("/Raw");
+    
   };
 
   return (

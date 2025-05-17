@@ -15,6 +15,10 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     public User register(String username, String password) {
+        if (userRepository.findByUsername(username).isPresent()) {
+            throw new UserAlreadyExistsException("Username already exists");
+        }
+
         User user = User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))

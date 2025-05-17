@@ -19,14 +19,15 @@ export default function BlackGreenBackground(){
   }, [navigate]);
 
   const logout = async () => {
-  await fetch('http://localhost:8080/api/auth/logout', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
-  navigate('/Login');
+  try {
+    await fetch('http://localhost:8080/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include'
+    });
+    navigate('/Login');
+  } catch (err) {
+    console.error("Logout failed", err);
+  }
 };
 
     return (

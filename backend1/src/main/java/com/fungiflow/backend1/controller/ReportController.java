@@ -49,4 +49,31 @@ public class ReportController {
                     .body(new ByteArrayResource("Failed to generate report".getBytes()));
         }
     }
+    @GetMapping("/lab")
+    public ResponseEntity<ByteArrayResource> getLabReport(
+            @RequestParam String type,
+            @RequestParam int year,
+            @RequestParam(required = false) Integer month,
+            @RequestParam String generatedBy
+    ) {
+        int finalMonth = (month != null) ? month : 1;
+
+        try {
+            byte[] pdf = reportService.generateLabReport(type, year, finalMonth, generatedBy);
+            ByteArrayResource resource = new ByteArrayResource(pdf);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=lab_report_" + year + "_" + finalMonth + ".pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .contentLength(pdf.length)
+                    .body(resource);
+
+        } catch (Exception e) {
+            logger.error("Error generating lab report: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ByteArrayResource("Failed to generate lab report".getBytes()));
+        }
+    }
+
+
 }

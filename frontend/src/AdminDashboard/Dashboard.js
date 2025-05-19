@@ -2,6 +2,8 @@ import React from 'react';
 import SalesChart from './SalesChart';
 import LowStockAlerts from './LowStockAlerts';
 import { BarChart2, AlertTriangle, ClipboardList } from 'lucide-react';
+import LabChart from './LabChart';
+
 
 export default function Dashboard() {
   return (
@@ -36,6 +38,17 @@ export default function Dashboard() {
           </div>
           <div className="card-body alerts-container">
             <LowStockAlerts />
+          </div>
+        </div>
+
+        {/* Lab Performance Chart Card */}
+        <div className="dashboard-card">
+          <div className="card-header">
+            <ClipboardList className="card-icon" size={20} />
+            <h3 className="card-title">Lab Performance</h3>
+          </div>
+          <div className="card-body chart-container">
+            <LabChart />
           </div>
         </div>
       </div>
@@ -199,7 +212,7 @@ export default function Dashboard() {
           }
 
           .dashboard-card {
-            height: 450px;
+            height: 750px;
           }
         }
       `}</style>

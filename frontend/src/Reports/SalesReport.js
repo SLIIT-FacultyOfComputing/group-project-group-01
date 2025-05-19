@@ -101,7 +101,7 @@ export default function SalesReport() {
 
                 <div className="col-md-4">
                   <div className="input-group-custom">
-                    <label htmlFor="year" className="form-label">Fiscal Year</label>
+                    <label htmlFor="year" className="form-label">Year</label>
                     <div className="input-wrapper">
                       <input
                         type="number"

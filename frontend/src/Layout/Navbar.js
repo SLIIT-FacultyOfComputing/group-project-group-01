@@ -93,7 +93,7 @@ export default function Navbar() {
     <Dropdown.Item as={Link} to="/analytics/sales" className="dropdown-item-custom">
       <i className="fas fa-chart-line me-2"></i> Sales Reports
     </Dropdown.Item>
-    <Dropdown.Item as={Link} to="/analytics/lab" className="dropdown-item-custom">
+    <Dropdown.Item as={Link} to="/analytics/labs" className="dropdown-item-custom">
       <i className="fas fa-flask me-2"></i> Lab Reports
     </Dropdown.Item>
   </Dropdown.Menu>

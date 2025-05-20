@@ -5,18 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AllocationDto {
+public class BranchDto {
     private Long id;
-    private Long branchId;
-    private Long product_id;
-    private int totalQty;
-    private int allocatedQty;
-    private LocalDate date;
+    private String branchName;
+    private String location;
 }
-

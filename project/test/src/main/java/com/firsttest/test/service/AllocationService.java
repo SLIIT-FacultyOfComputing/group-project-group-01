@@ -5,7 +5,7 @@ import com.firsttest.test.dto.AllocationDto;
 import java.util.List;
 
 public interface AllocationService {
-    AllocationDto createAllocation(AllocationDto allocationDto);
+    AllocationDto createAllocation(Long branchId, AllocationDto allocationDto);
 
     AllocationDto getAllocationById(Long id);
 

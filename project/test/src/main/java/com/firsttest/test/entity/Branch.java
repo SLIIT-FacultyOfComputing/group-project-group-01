@@ -2,11 +2,9 @@ package com.firsttest.test.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +19,13 @@ public class Branch {
 
     @Column(nullable = false)
     private String location;
-    private String branchName;}
+
+    @Column(nullable = false)
+    private String branchName;
+
+    public void setId(Long id) {
+    }
+}
 
 //     @OneToOne
 //     @JoinColumn(name = "manager_id", referencedColumnName = "employeeId")

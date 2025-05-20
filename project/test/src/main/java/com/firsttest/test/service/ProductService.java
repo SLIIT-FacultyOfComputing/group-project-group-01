@@ -1,19 +1,22 @@
 package com.firsttest.test.service;
 
 import com.firsttest.test.dto.ProductDto;
+import com.firsttest.test.entity.Product;
 
 import java.util.List;
 
 public interface ProductService {
     ProductDto createProduct(ProductDto productDto);
 
-    ProductDto getProductById(Long productId);
+    Product getProductEntityById(Long id);
+
+    ProductDto getProductById(Long product_id);
 
     List<ProductDto> getAllProducts();
 
-    ProductDto updateProduct(Long productId, ProductDto updatedDto);
+    ProductDto updateProduct(Long product_id, ProductDto updatedDto);
 
-    void deleteProduct(Long productId);
+    void deleteProduct(Long product_id);
 
-    void updateProductQuantity(Long productId, int quantityChange);
+    void updateProductQuantity(Long product_id, int quantityChange);
 }

@@ -2,6 +2,7 @@ package com.firsttest.test.service.impl;
 
 import com.firsttest.test.SalesMapper.SalesMapper;
 import com.firsttest.test.dto.SalesDto;
+import com.firsttest.test.entity.Product;
 import com.firsttest.test.entity.Sales;
 import com.firsttest.test.exception.ResourceNotFoundException;
 import com.firsttest.test.repository.SalesRepository;
@@ -23,10 +24,16 @@ public class SalesServiceImpl implements SalesService {
     @Override
     public SalesDto createSales(SalesDto salesDto) {
         Sales sales = SalesMapper.mapToSales(salesDto);
+
+        Product product = productService.getProductEntityById(salesDto.getProduct_id()); // Use the entity, not DTO
+        sales.setProduct(product);
+
         Sales savedSales = salesRepository.save(sales);
-        productService.updateProductQuantity(salesDto.getProductId(), salesDto.getQuantity());
+        productService.updateProductQuantity(product.getProduct_id(), salesDto.getQuantity());
+
         return SalesMapper.mapToSalesDto(savedSales);
     }
+
 
     @Override
     public SalesDto getSalesById(Long salesID) {

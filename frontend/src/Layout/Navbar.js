@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
-import './Navbar.css'; // Keep the same CSS file for now
-
+import './Navbar.css'; 
 export default function Navbar() {
   const location = useLocation();
 

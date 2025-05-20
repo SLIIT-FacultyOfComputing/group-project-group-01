@@ -5,7 +5,7 @@ import com.firsttest.test.entity.Allocation;
 import com.firsttest.test.entity.Branch;
 import com.firsttest.test.entity.Product;
 import com.firsttest.test.exception.ResourceNotFoundException;
-import com.firsttest.test.mapper.AllocationMapper;
+import com.firsttest.test.AllocationMapper.AllocationMapper;
 import com.firsttest.test.repository.AllocationRepository;
 import com.firsttest.test.repository.BranchRepository;
 import com.firsttest.test.repository.ProductRepository;
@@ -24,11 +24,26 @@ public class AllocationServiceImpl implements AllocationService {
     private final ProductRepository productRepository;
 
     @Override
-    public AllocationDto createAllocation(AllocationDto allocationDto) {
+    public AllocationDto createAllocation(Long branchId, AllocationDto allocationDto) {
+        if (branchId == null) {
+            throw new IllegalArgumentException("Branch ID must not be null");
+        }
+
+        Branch branch = branchRepository.findById(branchId)
+                .orElseThrow(() -> new ResourceNotFoundException("Branch not found with id: " + branchId));
+
+        Product product = productRepository.findById(allocationDto.getProduct_id())
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + allocationDto.getProduct_id()));
+
         Allocation allocation = AllocationMapper.mapToAllocation(allocationDto);
+        allocation.setBranch(branch);
+        allocation.setProduct(product);
+
         allocation = allocationRepository.save(allocation);
         return AllocationMapper.mapToAllocationDto(allocation);
     }
+
+
 
     @Override
     public AllocationDto getAllocationById(Long id) {

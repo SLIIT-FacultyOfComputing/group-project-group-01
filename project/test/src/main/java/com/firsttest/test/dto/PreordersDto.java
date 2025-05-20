@@ -18,7 +18,5 @@ public class PreordersDto {
     private int quantity;
     private double price;
     private String date;
-
-
 }
 

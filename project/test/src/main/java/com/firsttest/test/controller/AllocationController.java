@@ -20,9 +20,22 @@ public class AllocationController {
     // Create Allocation
     @PostMapping
     public ResponseEntity<AllocationDto> createAllocation(@RequestBody AllocationDto allocationDto) {
-        AllocationDto savedAllocation = allocationService.createAllocation(allocationDto);
+        Long branchId = allocationDto.getBranchId();
+        if (branchId == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        AllocationDto savedAllocation = allocationService.createAllocation(branchId, allocationDto);
         return new ResponseEntity<>(savedAllocation, HttpStatus.CREATED);
     }
+
+
+
+
+
+
+
+
+
 
     // Get Allocation by ID
     @GetMapping("/{id}")

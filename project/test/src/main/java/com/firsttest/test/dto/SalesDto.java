@@ -18,6 +18,6 @@ public class SalesDto {
     private int quantity;
     private double price;
     private String date;
-    private long productId;
+    private long product_id;
 }
 

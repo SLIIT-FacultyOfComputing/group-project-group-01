@@ -1,4 +1,4 @@
-package com.firsttest.test.mapper;
+package com.firsttest.test.AllocationMapper;
 
 import com.firsttest.test.dto.AllocationDto;
 import com.firsttest.test.entity.Allocation;

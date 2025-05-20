@@ -19,6 +19,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
+    public Product getProductEntityById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+    }
+
+
+    @Override
     public ProductDto createProduct(ProductDto productDto) {
         productDto.setProductId(null);
         // Convert ProductDto to Product entity
@@ -32,10 +39,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProductById(Long productId) {
+    public ProductDto getProductById(Long product_id) {
         // Fetch the product by ID
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+        Product product = productRepository.findById(product_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + product_id));
 
         // Convert entity to ProductDto and return
         return ProductMapper.mapToProductDto(product);
@@ -50,10 +57,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateProduct(Long productId, ProductDto updatedDto) {
+    public ProductDto updateProduct(Long product_id, ProductDto updatedDto) {
         // Fetch the product by ID
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+        Product product = productRepository.findById(product_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + product_id));
 
         // Update the product fields from the updatedDto
         product.setName(updatedDto.getName());
@@ -68,20 +75,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Long productId) {
+    public void deleteProduct(Long product_id) {
         // Check if the product exists
-        if (!productRepository.existsById(productId)) {
-            throw new ResourceNotFoundException("Product not found with id: " + productId);
+        if (!productRepository.existsById(product_id)) {
+            throw new ResourceNotFoundException("Product not found with id: " + product_id);
         }
 
         // Delete the product by ID
-        productRepository.deleteById(productId);
+        productRepository.deleteById(product_id);
     }
 
     @Override
-    public void updateProductQuantity(Long productId, int quantityChange) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+    public void updateProductQuantity(Long product_id, int quantityChange) {
+        Product product = productRepository.findById(product_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + product_id));
 
         int newQuantity = product.getQuantity() - quantityChange;
         if (newQuantity < 0) {

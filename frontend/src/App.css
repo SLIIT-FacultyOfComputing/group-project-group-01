@@ -1,0 +1,99 @@
+/* Footer section */
+.footer {
+    position: fixed; /* Changed from 'center' to valid value */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #1a3e2a;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    z-index: 100;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, #224d35, #6fcf77, #224d35);
+    font-family: sans-serif;
+    color: white;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Green text */
+.text-green {
+    color: #2d6a4f;
+}
+
+/* Greenish card background */
+.card-body-custom {
+    background-color: #a9eab0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom green border and background for form controls */
+.form-control {
+    border: 1px solid #78c2ad;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 5px rgba(45, 106, 79, 0.5);
+    outline: none;
+}
+
+/* Green button with hover effect */
+.btn-green {
+    background-color: #2d6a4f;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-green:hover {
+    background-color: #245d3d;
+}
+
+.btn-green:focus {
+    outline: none;
+}
+
+/* Red border for invalid fields */
+.is-invalid {
+    border-color: #f44336;
+}
+
+.invalid-feedback {
+    color: #f44336;
+    font-size: 0.875rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        margin: 0 auto;
+    }
+}

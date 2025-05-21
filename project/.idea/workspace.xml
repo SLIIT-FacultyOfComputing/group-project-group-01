@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="31a787e3-e0f5-4105-9d7c-3ddb465115cc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/AllocationMapper/AllocationMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/ProductMapper/ProductMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/controller/AllocationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/dto/AllocationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/dto/ProductDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/entity/Allocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/entity/Branch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/entity/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/repository/AllocationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/repository/BranchRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/repository/ProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/AllocationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/impl/AllocationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/SalesMapper/SalesMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/SalesMapper/SalesMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/controller/PreordersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/controller/PreordersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/controller/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/controller/SalesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/dto/PreordersDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/dto/PreordersDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/dto/SalesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/dto/SalesDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/entity/Sales.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/entity/Sales.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/repository/PreordersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/repository/PreordersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/PreordersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/PreordersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/impl/PreordersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/impl/PreordersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/impl/SalesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/com/firsttest/test/service/impl/SalesServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2ufBBnoftmHUZQVdIDf7EgJD8m2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.TestApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/user/Desktop/1/group-project-group-01/project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Sales50\project\test\src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.firsttest.test.service.impl" />
+      <recent name="com.firsttest.test.service" />
+      <recent name="com.firsttest.test.repository" />
+      <recent name="com.firsttest.test.dto" />
+      <recent name="com.firsttest.test.controller" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="TestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="test" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.firsttest.test.TestApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="31a787e3-e0f5-4105-9d7c-3ddb465115cc" name="Changes" comment="" />
+      <created>1742629615012</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742629615012</updated>
+      <workItem from="1742629616220" duration="1277000" />
+      <workItem from="1742826406776" duration="2939000" />
+      <workItem from="1742913512296" duration="8486000" />
+      <workItem from="1742965935248" duration="9731000" />
+      <workItem from="1743255830886" duration="20000" />
+      <workItem from="1743310728518" duration="3010000" />
+      <workItem from="1743397128553" duration="1537000" />
+      <workItem from="1745054624419" duration="1897000" />
+      <workItem from="1745125550136" duration="8568000" />
+      <workItem from="1745208005815" duration="2447000" />
+      <workItem from="1745742274135" duration="5775000" />
+      <workItem from="1745768421920" duration="1495000" />
+      <workItem from="1746607116891" duration="791000" />
+      <workItem from="1746610444964" duration="616000" />
+      <workItem from="1746637880474" duration="1475000" />
+      <workItem from="1746639382646" duration="3216000" />
+      <workItem from="1746680872103" duration="3349000" />
+      <workItem from="1746687876080" duration="6819000" />
+      <workItem from="1746770428549" duration="3169000" />
+      <workItem from="1747209962559" duration="12000" />
+      <workItem from="1747218072016" duration="5683000" />
+      <workItem from="1747244410453" duration="896000" />
+      <workItem from="1747456762242" duration="18106000" />
+      <workItem from="1747545112057" duration="10886000" />
+      <workItem from="1747631871379" duration="8338000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

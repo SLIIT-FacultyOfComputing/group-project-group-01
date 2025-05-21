@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
-import './Navbar.css'; 
+import Lottie from 'lottie-react';
+import PlantAnimation from '../PlantAnimation.json';
+import './Navbar.css';
+
 export default function Navbar() {
   const location = useLocation();
 
@@ -10,30 +13,7 @@ export default function Navbar() {
   const isDashboardPage = location.pathname === "/admin/dashboard";
   const isSalesReportPage = location.pathname === "/analytics/sales";
 
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [showUserMenu, setShowUserMenu] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const formattedDate = currentTime.toLocaleDateString('en-US', {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-
-  const formattedTime = currentTime.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-  });
 
   const toggleUserMenu = () => {
     setShowUserMenu(!showUserMenu);
@@ -42,84 +22,81 @@ export default function Navbar() {
   return (
     <>
       <div className="sidebar fixed-left d-flex flex-column">
-        <div className="brand-section p-3">
-          <Link to="/" className="navbar-brand d-block text-decoration-none">
-            <div className="brand-text-wrapper">
-              <span className="main-brand d-block">Fungi Flow</span>
-              <span className="sub-brand">Admin and Management</span>
-            </div>
+        {/* Brand Section with Plant Animation */}
+        <div className="brand-section p-3 d-flex align-items-center gap-3" style={{ minHeight: 64 }}>
+          <Lottie
+            animationData={PlantAnimation}
+            loop
+            autoplay
+            style={{ width: 48, height: 48, minWidth: 48, minHeight: 48 }}
+          />
+          <Link to="/" className="navbar-brand d-block text-decoration-none" style={{ lineHeight: 1 }}>
+            <span className="main-brand d-block" style={{
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '1.45rem',
+              fontWeight: 700,
+              color: '#fff',
+              letterSpacing: '0.7px'
+            }}>Fungi Flow</span>
+            <span className="sub-brand" style={{
+              fontSize: '1rem',
+              color: 'rgba(255,255,255,0.85)',
+              fontWeight: 500,
+              letterSpacing: '0.3px'
+            }}>Admin and Management</span>
           </Link>
         </div>
 
+        {/* Navigation Links */}
         <div className="nav-links flex-grow-1 p-3">
           <ul className="nav flex-column">
             <li className="nav-item mb-2">
               <Link 
-                className={`nav-link py-2 px-3 nav-link-custom ${isDashboardPage ? 'active' : ''}`} 
+                className={`nav-link py-2 px-3 nav-link-custom d-flex align-items-center${isDashboardPage ? ' active' : ''}`} 
                 to="/admin/dashboard"
               >
-                <i className="fas fa-tachometer-alt me-2"></i> Dashboard
+                <i className="bi bi-speedometer2 me-2"></i> Dashboard
               </Link>
             </li>
-            
             <li className="nav-item mb-2">
               <Link 
-                className={`nav-link py-2 px-3 nav-link-custom ${isMaterialPage ? 'active' : ''}`} 
+                className={`nav-link py-2 px-3 nav-link-custom d-flex align-items-center${isMaterialPage ? ' active' : ''}`} 
                 to="/materials"
               >
-                <i className="fas fa-boxes me-2"></i> Materials
+                <i className="bi bi-basket me-2"></i> Materials
               </Link>
             </li>
-
             <li className="nav-item mb-2">
-              <Link 
-                className={`nav-link py-2 px-3 nav-link-custom ${isEmployeePage ? 'active' : ''}`} 
-                to="/employees"
-              >
-                <i className="fas fa-users me-2"></i> Employees
-              </Link>
-            </li>
+  <Link 
+    className={`nav-link py-2 px-3 nav-link-custom d-flex align-items-center${isEmployeePage ? ' active' : ''}`} 
+    to="/employees"
+  >
+    <i className="bi bi-people me-2"></i> Employees
+  </Link>
+</li>
 
             <Dropdown as="li" className="nav-item mb-2">
-  <Dropdown.Toggle
-    as="a"
-    className={`nav-link py-2 px-3 nav-link-custom ${isSalesReportPage ? 'active' : ''}`}
-  >
-    <i className="fas fa-chart-bar me-2"></i> Analytics
-  </Dropdown.Toggle>
-
-  <Dropdown.Menu className="dropdown-menu-custom">
-    <Dropdown.Item as={Link} to="/analytics/sales" className="dropdown-item-custom">
-      <i className="fas fa-chart-line me-2"></i> Sales Reports
-    </Dropdown.Item>
-    <Dropdown.Item as={Link} to="/analytics/labs" className="dropdown-item-custom">
-      <i className="fas fa-flask me-2"></i> Lab Reports
-    </Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
+              <Dropdown.Toggle
+                as="a"
+                className={`nav-link py-2 px-3 nav-link-custom d-flex align-items-center${isSalesReportPage ? ' active' : ''}`}
+              >
+                <i className="bi bi-bar-chart me-2"></i> Analytics
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="dropdown-menu-custom">
+                <Dropdown.Item as={Link} to="/analytics/sales" className="dropdown-item-custom">
+                  <i className="bi bi-graph-up me-2"></i> Sales Reports
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/analytics/labs" className="dropdown-item-custom">
+                  <i className="bi bi-flask me-2"></i> Lab Reports
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </ul>
         </div>
 
+        {/* Footer: Add Material only (not Add Employee), Time, User Profile */}
         <div className="sidebar-footer p-3">
-          {(isMaterialPage || isEmployeePage) && (
-            <div className="action-buttons mb-3">
-              {isMaterialPage && (
-                <Link className="btn btn-action w-100 py-2 add-button" to="/addmaterial">
-                  <i className="fas fa-plus-circle me-2"></i> Add Material
-                </Link>
-              )}
-              {isEmployeePage && (
-                <Link className="btn btn-action w-100 py-2 add-button" to="/addemployee">
-                  <i className="fas fa-user-plus me-2"></i> Add Employee
-                </Link>
-              )}
-            </div>
-          )}
-
-          <div className="time-display mb-3 p-2 text-center">
-            <div className="date-part">{formattedDate}</div>
-            <div className="time-part">{formattedTime}</div>
-          </div>
+         
 
           <div className="user-profile-menu position-relative">
             <button onClick={toggleUserMenu} className="user-menu-toggle w-100 p-2">
@@ -127,7 +104,6 @@ export default function Navbar() {
                 <span>AD</span>
               </div>
             </button>
-            
             {showUserMenu && (
               <div className="user-dropdown shadow-lg">
                 <div className="user-header p-3">
@@ -137,21 +113,20 @@ export default function Navbar() {
                   </div>
                 </div>
                 <Link to="/profile" className="user-menu-item">
-                  <i className="fas fa-user me-2"></i> My Profile
+                  <i className="bi bi-person me-2"></i> My Profile
                 </Link>
                 <Link to="/settings" className="user-menu-item">
-                  <i className="fas fa-cog me-2"></i> Settings
+                  <i className="bi bi-gear me-2"></i> Settings
                 </Link>
                 <div className="divider"></div>
                 <Link to="/logout" className="user-menu-item text-danger">
-                  <i className="fas fa-sign-out-alt me-2"></i> Logout
+                  <i className="bi bi-box-arrow-right me-2"></i> Logout
                 </Link>
               </div>
             )}
           </div>
         </div>
       </div>
-
       <div className="sidebar-spacer"></div>
     </>
   );

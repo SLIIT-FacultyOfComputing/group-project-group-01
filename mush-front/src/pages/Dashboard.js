@@ -1,89 +1,112 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Lottie from "lottie-react";
-import plantGrow from "../PlantAnimation.json";
+import mushroomGrowth from "../PlantAnimation.json";
+import { FaSeedling, FaFlask, FaChartLine, FaBoxOpen } from 'react-icons/fa';
 
-export default function BlackGreenBackground(){
-
-  const [user, setUser] = useState('');
+export default function Dashboard() {
   const navigate = useNavigate();
+  
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/auth/me', { credentials: 'include' })
-      .then(res => {
-        if (!res.ok) throw new Error('Not logged in');
-        return res.text();
-      })
-      .then(setUser)
-      .catch(() => navigate('/Login'));
-  }, [navigate]);
+  const quickActions = [
+    { 
+      icon: <FaSeedling className="text-success" size="2em" />,
+      title: "Lab Cultures",
+      description: "Monitor active mushroom cultures",
+      link: "/lab"
+    },
+    { 
+      icon: <FaFlask className="text-info" size="2em" />,
+      title: "Production",
+      description: "View cultivation progress",
+      link: "/production"
+    },
+    { 
+      icon: <FaChartLine className="text-warning" size="2em" />,
+      title: "Sales Analytics",
+      description: "Branch performance & trends",
+      link: "/analytics"
+    },
+    { 
+      icon: <FaBoxOpen className="text-danger" size="2em" />,
+      title: "Inventory",
+      description: "Manage raw materials",
+      link: "/inventory"
+    }
+  ];
 
-  const logout = async () => {
-  try {
-    await fetch('http://localhost:8080/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include'
-    });
-    navigate('/Login');
-  } catch (err) {
-    console.error("Logout failed", err);
-  }
-};
-
-    return (
-    <div
-    style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "120px",
-        height: "50vh"
-    }}
-    >  
-        <div>
-            <h1
-            style={{
-                fontSize: "54px",
-                fontWeight: 700,
-                fontFamily: "Lexend, sans-serif",
-                textAlign: "left",
-                marginLeft: "-60px",
-                color: "rgb(237, 241, 214)" 
-            }}
-            >Grow Smart Harvest Better <br />
-                 With Fungi Flow</h1>
-
-            <p  style={{
-                fontFamily: "Lexend, sans-serif",
-                textAlign: "left",
-                marginLeft: "-60px",
-                fontSize: "18px",
-                color: " #EDF1D6" }}>
-
-            All-in-one platform for smart mushroom farming. Track materials & manage inventory.<br />
-            From cultivation to sales, streamline operations, and boost efficiency effortlessly.</p>
-
-            <div
-          style={{
-            fontFamily: "Lexend, sans-serif",
-            marginTop: "20px",
-            marginLeft: "-60px"
-          }}
-        >
-          <h4>Welcome, {user}</h4>
-          <button
-            onClick={logout}
-            className="btn btn-outline-light mt-2"
-          >
-            Logout
-          </button>
+  return (
+    <div className="p-4">
+      {/* Hero Section */}
+      <div className="header-section p-4 mb-4 bg-light rounded-3 shadow-sm border-start border-4 border-success">
+        <div className="row align-items-center">
+          <div className="col-lg-6">
+            <h1 className="display-5 fw-bold text-success mb-3">
+              Welcome to FungiFlow
+              <div className="sub-brand fs-4 mt-2">MTDC Production Management</div>
+            </h1>
+            <p className="lead text-muted">
+              Managing 85% of Sri Lanka's mushroom cultivation - Tracking 5 varieties across 4 facilities
+            </p>
+          </div>
+          <div className="col-lg-6">
+            <Lottie 
+              animationData={mushroomGrowth} 
+              style={{ height: 200 }} 
+            />
+          </div>
         </div>
-         </div>
+      </div>
 
-         <div style={{ width: "400px", height: "400px", marginRight: "-100px"}}>
-        <Lottie animationData={plantGrow} loop={true} autoplay />
+      
+
+      {/* Quick Actions */}
+      <h3 className="mb-4 fw-bold text-success">Core Operations</h3>
+      <div className="row g-4">
+        {quickActions.map((action, index) => (
+          <div key={index} className="col-12 col-md-6 col-xl-3">
+            <div 
+              className="card border-0 shadow-sm h-100 hover-scale"
+              onClick={() => navigate(action.link)}
+              style={{ cursor: 'pointer', transition: 'transform 0.2s' }}
+            >
+              <div className="card-body">
+                <div className="d-flex align-items-center mb-3">
+                  <div className="bg-success bg-opacity-10 p-3 rounded-circle me-3">
+                    {action.icon}
+                  </div>
+                  <h5 className="mb-0 fw-bold">{action.title}</h5>
+                </div>
+                <p className="text-muted mb-0">{action.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Production Overview */}
+      <div className="row mt-5 g-4">
+        <div className="col-12">
+          <div className="card border-0 shadow-sm">
+            <div className="card-header bg-success text-white">
+              <h5 className="mb-0">Cultivation Varieties</h5>
+            </div>
+            <div className="card-body">
+              <div className="row g-4 text-center">
+                {['American Oyster', 'Abalone', 'Bhutan Oyster', 'Pink Oyster', 'Milky'].map((variety, idx) => (
+                  <div key={idx} className="col">
+                    <div className="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block">
+                      <FaSeedling className="text-success" size="1.5em" />
+                    </div>
+                    <div className="mt-2 small fw-bold">{variety}</div>
+                    <div className="text-muted small">1-2 weeks cycle</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
-    )
+  );
 }

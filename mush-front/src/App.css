@@ -33,6 +33,35 @@
     padding: 150px;
     min-height: 100vh;
   }
+  :root {
+  --sidebar-width: 280px;
+}
+
+/* Sidebar spacer for desktop */
+.sidebar-spacer {
+  margin-left: var(--sidebar-width);
+  transition: margin 0.3s;
+}
+
+/* Main content alignment */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 32px 32px 32px 32px; /* adjust as needed */
+  min-height: 100vh;
+  transition: margin 0.3s;
+  color: #343a40;
+  background: #f8f9fa;
+}
+
+/* Responsive: remove margin on mobile */
+@media (max-width: 991px) {
+  .sidebar-spacer,
+  .main-content {
+    margin-left: 0;
+    padding: 16px 8px;
+  }
+}
+
 
 @keyframes App-logo-spin {
   from {

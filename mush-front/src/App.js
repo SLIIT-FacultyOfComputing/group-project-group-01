@@ -1,55 +1,56 @@
 import './App.css';
-import"../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './layout/Navbar';
 import Raw from './pages/Raw';
-import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
-import SaveRaw from './Raws/SaveRaw';
-import EditRaw from './Raws/EditRaw';
-import SaveInv from './Invs/SaveInv';
-import EditInv from './Invs/EditInv';
-import SaveSupplier from './Supplier/SaveSupplier'
-import EditSupplier from './Supplier/EditSupplier';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import InventoryManagement from './pages/InventoryManagement';
 import Supplier from './pages/Supplier';
-import Inv from './pages/Inv';
 import Stock from './pages/Stock';
 import Name from './layout/Name';
 import Dashboard from './pages/Dashboard';
-import InvLab from './pages/InvLab';
-import InvSales from './pages/InvSales';
-import InvOther from './pages/InvOther';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import ProtectedLayout from './auth/ProtectedRoute';
 
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/Login' || location.pathname === '/Signup';
+
+  return (
+    <>
+      {!isAuthPage && <Navbar />}
+      <div className="sidebar-spacer"></div>
+      <main className="main-content">
+        {children}
+      </main>
+    </>
+  );
+};
 
 function App() {
   return (
-    <div 
-    className="appBackground flex items-center justify-center text-white">
-      <Router>  
-      <Navbar/>
-      <Routes>
-        <Route exact path="/Login" element={<Login />} />
-        <Route exact path="/Signup" element={<Signup />} />
+    <div>
+      <Router>
+        <Layout>
+          <Routes>
+            
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Signup" element={<Signup />} />
 
-        <Route element={<ProtectedLayout />}>
-            <Route exact path="/" element={<Name/>}/>
-            <Route exact path="/Dashboard" element={<Dashboard/>}/>
-            <Route exact path="/Raw" element={<Raw/>}/>
-            <Route exact path="/Inv" element={<Inv/>}/>
-            <Route exact path="/Supplier" element={<Supplier/>}/>
-            <Route exact path="/Stock" element={<Stock/>}/>
-            <Route exact path="/SaveRaw" element={<SaveRaw/>}/>
-            <Route exact path="/EditRaw/:RawId" element={<EditRaw/>}/>
-            <Route exact path="/SaveInv" element={<SaveInv/>}/>
-            <Route exact path="/EditInv/:InvId" element={<EditInv/>}/>
-            <Route exact path="/SaveSupplier" element={<SaveSupplier/>}/>
-            <Route exact path="/EditSupplier/:SupplierId" element={<EditSupplier/>}/>
-            <Route exact path="/InvLab" element={<InvLab/>}/>
-            <Route exact path="/InvSales" element={<InvSales/>}/>
-            <Route exact path="/InvOther" element={<InvOther/>}/>
-        </Route>
-      </Routes>
+            {/* Protected Routes */}
+            <Route element={<ProtectedLayout />}>
+              <Route path="/" element={<Name />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/Raw" element={<Raw />} />
+              <Route path="/inventory/:usageType?" element={<InventoryManagement />} />
+              <Route path="/inventory/edit/:InvId" element={<InventoryManagement />} />
+              <Route path="/Supplier" element={<Supplier />} />
+              <Route path="/Stock" element={<Stock />} />
+              <Route path="/SaveSupplier" element={<Supplier />} />
+              <Route path="/EditSupplier/:SupplierId" element={<Supplier />} />
+            </Route>
+          </Routes>
+        </Layout>
       </Router>
     </div>
   );

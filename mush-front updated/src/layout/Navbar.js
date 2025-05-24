@@ -13,7 +13,6 @@ export default function Navbar() {
   const [currentUser, setCurrentUser] = useState(null);
   const profileRef = useRef(null);
 
-  // Fetch current user info
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
@@ -23,7 +22,7 @@ export default function Navbar() {
         setCurrentUser(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);
-        // If unauthorized, redirect to login
+    
         if (error.response?.status === 401) {
           navigate('/Login');
         }
@@ -33,7 +32,6 @@ export default function Navbar() {
     fetchCurrentUser();
   }, [navigate]);
 
-  // Close dropdowns if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -44,7 +42,6 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile nav and dropdowns on route change
   useEffect(() => {
     setMobileNavOpen(false);
     setAnalyticsOpen(false);
@@ -59,7 +56,7 @@ export default function Navbar() {
       navigate('/Login');
     } catch (error) {
       console.error('Logout failed:', error);
-      // Still navigate to login page even if logout fails
+      
       navigate('/Login');
     }
   };

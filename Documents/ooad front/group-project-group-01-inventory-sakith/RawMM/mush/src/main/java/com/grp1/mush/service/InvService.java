@@ -1,0 +1,51 @@
+package com.grp1.mush.service;
+
+import com.grp1.mush.dto.InvDTO;
+import com.grp1.mush.model.Inv;
+import com.grp1.mush.repo.InvRepo;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+
+@Service
+@Transactional
+public class InvService {
+    @Autowired
+    private InvRepo InvRepo;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired 
+    private StockService stockService;
+
+    public List<InvDTO> getAllInvs() {
+        List<Inv> InvList = InvRepo.findAll();
+        return modelMapper.map(InvList,new TypeToken<List<InvDTO>>(){}.getType());
+    }
+    public InvDTO saveInv(InvDTO InvDTO) {
+        InvRepo.save(modelMapper.map(InvDTO, Inv.class));
+        stockService.updateStock(InvDTO.getMaterial());
+        return InvDTO;
+    }
+    public InvDTO updateInv(InvDTO InvDTO){
+        InvRepo.save(modelMapper.map(InvDTO, Inv.class));
+        stockService.updateStock(InvDTO.getMaterial());
+        return InvDTO;
+    }
+    public String deleteInv(Long nid){
+        Inv Inv = InvRepo.findById(nid)
+        .orElseThrow(() -> new RuntimeException("Inv not found with id: " + nid));
+    InvRepo.delete(Inv);
+    stockService.updateStock(Inv.getMaterial());
+    return "Inv Deleted";
+    }
+    public InvDTO getInvById(Long nid) {
+        Inv Inv = InvRepo.findById(nid)
+                .orElseThrow(() -> new RuntimeException("Inv not found with id: " + nid));
+        return modelMapper.map(Inv, InvDTO.class);
+    }   
+}

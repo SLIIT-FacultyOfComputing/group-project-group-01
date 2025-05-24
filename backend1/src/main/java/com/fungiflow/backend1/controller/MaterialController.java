@@ -22,8 +22,6 @@ public class MaterialController {
         return materialService.getAllMaterials();
     }
 
-
-
     @PostMapping("/add")
     public void saveMaterial(@RequestBody MaterialDTO materialDTO)
     {
@@ -47,8 +45,5 @@ public class MaterialController {
         System.out.println("Received id: " + id);
         return materialService.getMaterialById(id);
     }
-
-
-
 
 }

@@ -2,8 +2,8 @@ package com.fungiflow.backend1.controller;
 
 import com.fungiflow.backend1.dto.LabChartDTO;
 import com.fungiflow.backend1.dto.SalesChartDTO;
-import com.fungiflow.backend1.model.Material;
 import com.fungiflow.backend1.model.Seed;
+import com.fungiflow.backend1.model.Stock;
 import com.fungiflow.backend1.service.AdminDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class AdminDashboardController {
     }
 
     @GetMapping("/low-stock-alerts")
-    public List<Material> getLowStockAlerts(@RequestParam(defaultValue = "10") int threshold) {
-        return adminDashboardService.getLowStockMaterials(threshold);
+    public List<Stock> getLowStockAlerts(@RequestParam(defaultValue = "10") int threshold) {
+        return adminDashboardService.getLowStockStocks(threshold);
     }
 
     // Returns overall sales grouped by customer and month
@@ -35,6 +35,7 @@ public class AdminDashboardController {
     public List<SalesChartDTO> getOverallSalesPerformance() {
         return adminDashboardService.getSalesChartGroupedData(); // reuse same logic
     }
+
     @GetMapping("/lab-chart")
     public ResponseEntity<List<LabChartDTO>> getLabChart(
             @RequestParam int year,
@@ -52,5 +53,4 @@ public class AdminDashboardController {
         List<LabChartDTO> data = adminDashboardService.getLabChartData(year, mushroomType);
         return ResponseEntity.ok(data);
     }
-
 }

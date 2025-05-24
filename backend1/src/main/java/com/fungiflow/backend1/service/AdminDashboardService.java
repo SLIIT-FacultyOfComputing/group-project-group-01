@@ -2,11 +2,11 @@ package com.fungiflow.backend1.service;
 
 import com.fungiflow.backend1.dto.LabChartDTO;
 import com.fungiflow.backend1.dto.SalesChartDTO;
-import com.fungiflow.backend1.model.Material;
 import com.fungiflow.backend1.model.Seed;
+import com.fungiflow.backend1.model.Stock;
 import com.fungiflow.backend1.repo.DailyUpdateRepository;
-import com.fungiflow.backend1.repo.MaterialRepo;
 import com.fungiflow.backend1.repo.SaleRepo;
+import com.fungiflow.backend1.repo.StockRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +20,10 @@ public class AdminDashboardService {
     private SaleRepo saleRepo;
 
     @Autowired
-    private MaterialRepo materialRepo;
+    private DailyUpdateRepository dailyUpdateRepository;
 
     @Autowired
-    private DailyUpdateRepository dailyUpdateRepository;
+    private StockRepo stockRepo;
 
     // --- SALES METHODS (untouched) ---
     public List<SalesChartDTO> getSalesChartGroupedData() {
@@ -52,9 +52,9 @@ public class AdminDashboardService {
         return result;
     }
 
-    // --- MATERIALS LOW STOCK ---
-    public List<Material> getLowStockMaterials(int threshold) {
-        return materialRepo.findByQuantityLessThan(threshold);
+    // --- STOCK LOW ALERTS ---
+    public List<Stock> getLowStockStocks(int threshold) {
+        return stockRepo.findByStockLessThan(threshold);
     }
 
     // --- LAB PERFORMANCE ---

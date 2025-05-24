@@ -6,7 +6,8 @@ function Inventory() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ name: '', quantity: '', unitPrice: '' });
+  // Added threshold to formData
+  const [formData, setFormData] = useState({ name: '', quantity: '', unitPrice: '', threshold: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
 
@@ -21,6 +22,7 @@ function Inventory() {
       setProducts(response.data || []);
     } catch (err) {
       setProducts([]);
+      setError('Failed to fetch products.');
     } finally {
       setLoading(false);
     }
@@ -47,11 +49,17 @@ function Inventory() {
       setError('Unit price must be greater than 0');
       return;
     }
+    if (formData.threshold !== '' && parseInt(formData.threshold) < 0) {
+      setError('Threshold cannot be negative');
+      return;
+    }
 
     const productData = {
       name: formData.name.trim(),
       quantity: parseInt(formData.quantity),
-      unitPrice: parseFloat(formData.unitPrice)
+      unitPrice: parseFloat(formData.unitPrice),
+      // If threshold is empty string, send null or undefined
+      threshold: formData.threshold === '' ? null : parseInt(formData.threshold)
     };
     const config = {
       headers: {
@@ -66,7 +74,7 @@ function Inventory() {
       } else {
         await axios.post('http://localhost:8080/api/product', productData, config);
       }
-      setFormData({ name: '', quantity: '', unitPrice: '' });
+      setFormData({ name: '', quantity: '', unitPrice: '', threshold: '' });
       setIsEditing(false);
       setEditId(null);
       await fetchProducts();
@@ -85,7 +93,8 @@ function Inventory() {
     setFormData({
       name: product.name,
       quantity: product.quantity.toString(),
-      unitPrice: product.unitPrice.toString()
+      unitPrice: product.unitPrice.toString(),
+      threshold: product.threshold !== null && product.threshold !== undefined ? product.threshold.toString() : ''
     });
     setIsEditing(true);
     setEditId(product.productId);
@@ -103,7 +112,7 @@ function Inventory() {
   };
 
   const resetForm = () => {
-    setFormData({ name: '', quantity: '', unitPrice: '' });
+    setFormData({ name: '', quantity: '', unitPrice: '', threshold: '' });
     setIsEditing(false);
     setEditId(null);
     setError(null);
@@ -161,6 +170,18 @@ function Inventory() {
                     step={0.01}
                   />
                 </div>
+                <div className="mb-3">
+                  <label className="form-label">Threshold (optional)</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="threshold"
+                    value={formData.threshold}
+                    onChange={handleInputChange}
+                    min={0}
+                    placeholder="Enter threshold for low stock"
+                  />
+                </div>
                 {error && (
                   <div className="alert alert-danger mb-3">{error}</div>
                 )}
@@ -196,6 +217,7 @@ function Inventory() {
                       <th>Product Name</th>
                       <th>Quantity</th>
                       <th>Unit Price</th>
+                      <th>Threshold</th> 
                       <th>Status</th>
                       <th>Actions</th>
                     </tr>
@@ -203,30 +225,36 @@ function Inventory() {
                   <tbody>
                     {loading ? (
                       <tr>
-                        <td colSpan="6" className="text-center py-4">Loading...</td>
+                        <td colSpan="7" className="text-center py-4">Loading...</td>
                       </tr>
                     ) : products.length === 0 ? (
                       <tr>
-                        <td colSpan="6" className="text-center py-4 text-muted">
+                        <td colSpan="7" className="text-center py-4 text-muted">
                           No products found.
                         </td>
                       </tr>
                     ) : (
                       products.map(product => {
-                        let status = 'In Stock';
-                        if (product.quantity === 0) status = 'Out of Stock';
-                        else if (product.quantity < 10) status = 'Low Stock';
+                        let status = product.status;
+                        if (!status) {
+                          if (product.quantity === 0) status = 'Out of Stock';
+                          else if (product.threshold !== undefined && product.threshold !== null && product.quantity < product.threshold) status = 'Low Stock';
+                          else status = 'In Stock';
+                        }
+                        const threshold = product.threshold !== undefined && product.threshold !== null ? product.threshold : '-';
                         return (
                           <tr key={product.productId} className="text-center">
                             <td>{product.productId}</td>
                             <td>{product.name}</td>
                             <td>{product.quantity}</td>
                             <td>{product.unitPrice.toFixed(2)}</td>
+                            <td>{threshold}</td> 
                             <td>
                               <span className={
                                 status === 'Out of Stock' ? 'badge bg-danger' :
-                                status === 'Low Stock' ? 'badge bg-warning text-dark' :
-                                'badge bg-success'
+                                  status === 'Low Stock' ? 'badge bg-warning text-dark' :
+                                  status === 'In Stock' ? 'badge bg-success' :
+                                  'badge bg-secondary'
                               }>
                                 {status}
                               </span>

@@ -37,8 +37,17 @@ export default function PreorderManagement() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/products');
-      setProducts(response.data || []);
+      const response = await axios.get('http://localhost:8080/api/product'); 
+      // Normalize product keys to match what the form expects
+      const normalizedProducts = response.data.map(p => ({
+        id: p.productId,
+        name: p.name,
+        quantity: p.quantity,
+        unit_price: p.unitPrice,
+        status: p.status,
+        threshold: p.threshold
+      }));
+      setProducts(normalizedProducts);
     } catch (err) {
       setProducts([]);
     }
@@ -53,14 +62,21 @@ export default function PreorderManagement() {
   };
 
   const handleProductChange = (e) => {
-    const productId = e.target.value;
-    const selectedProduct = products.find(p => p.id === parseInt(productId));
+    const productId = parseInt(e.target.value);
+    const selectedProduct = products.find(p => p.id === productId);
     if (selectedProduct) {
       setFormData(prev => ({
         ...prev,
         product_id: productId,
         product_name: selectedProduct.name,
-        unit_price: selectedProduct.unit_price
+        unit_price: selectedProduct.unit_price.toString()
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        product_id: '',
+        product_name: '',
+        unit_price: ''
       }));
     }
   };
@@ -121,11 +137,11 @@ export default function PreorderManagement() {
     setFormData({
       customer_name: preorder.customer_name,
       product_name: preorder.product_name,
-      unit_price: preorder.unit_price,
-      quantity: preorder.quantity,
-      price: preorder.price,
+      unit_price: preorder.unit_price.toString(),
+      quantity: preorder.quantity.toString(),
+      price: preorder.price.toString(),
       date: preorder.date,
-      product_id: preorder.product_id
+      product_id: preorder.product_id.toString()
     });
     setIsEditing(true);
     setEditId(preorder.id);
@@ -282,18 +298,12 @@ export default function PreorderManagement() {
                   </thead>
                   <tbody>
                     {loading ? (
-                      <tr>
-                        <td colSpan="8" className="text-center py-4">Loading preorders...</td>
-                      </tr>
+                      <tr><td colSpan="8" className="text-center p-3">Loading...</td></tr>
                     ) : preorders.length === 0 ? (
-                      <tr>
-                        <td colSpan="8" className="text-center py-4 text-muted">
-                          No preorders found.
-                        </td>
-                      </tr>
+                      <tr><td colSpan="8" className="text-center p-3">No preorders found.</td></tr>
                     ) : (
-                      preorders.map((preorder) => (
-                        <tr key={preorder.id} className="text-center">
+                      preorders.map(preorder => (
+                        <tr key={preorder.id}>
                           <td>{preorder.id}</td>
                           <td>{preorder.customer_name}</td>
                           <td>{preorder.product_name}</td>
@@ -302,19 +312,19 @@ export default function PreorderManagement() {
                           <td>{preorder.price}</td>
                           <td>{preorder.date}</td>
                           <td>
-                            <div className="btn-group btn-group-sm">
-                              <button
-                                className="btn btn-outline-primary"
-                                onClick={() => handleEdit(preorder)}
-                              >
-                                Update
-                              </button>
-                              <button
-                                className="btn btn-outline-danger"
-                                onClick={() => handleDelete(preorder.id)}
-                              >
-                                Delete
-                              </button>
+                            <div className= "btn-group btn-group-sm">
+                            <button
+                              className="btn btn-outline-primary"
+                              onClick={() => handleEdit(preorder)}
+                            >
+                              Update
+                            </button>
+                            <button
+                              className="btn btn-outline-danger"
+                              onClick={() => handleDelete(preorder.id)}
+                            >
+                              Delete
+                            </button>
                             </div>
                           </td>
                         </tr>

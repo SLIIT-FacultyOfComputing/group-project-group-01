@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -103,5 +104,8 @@ public class LabManagementService {
         allocation.setProductionQty(dto.getProductionQty());
 
         allocationRepository.save(allocation);
+    }
+    public List<Allocation> getAllAllocations() {
+        return allocationRepository.findAll();
     }
 }
